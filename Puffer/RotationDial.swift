@@ -26,6 +26,8 @@ import UIKit
 
 class RotationDial: UIView {
     
+    var rotationCenter: CGPoint = .zero
+    
     var radiansLimit: CGFloat = 45 * CGFloat.pi / 180
     
     let showRadiansLimit: CGFloat = 37.5 * CGFloat.pi / 180
@@ -34,6 +36,12 @@ class RotationDial: UIView {
     
     private var dialPlate: RotationAngleIndicator!
     private var pointer: CAShapeLayer = CAShapeLayer()
+    
+    fileprivate var rotationCal: RotationCalculator?
+    fileprivate var currentPoint: CGPoint?
+    fileprivate var previousPoint: CGPoint?
+    
+    var config = Puffer.Config()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -118,5 +126,62 @@ class RotationDial: UIView {
     
     func getRotationDegrees() -> CGFloat {
         return getRotationRadians() * 180 / CGFloat.pi
+    }
+}
+
+extension RotationDial {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let p = convert(point, to: self)
+        
+        if bounds.contains(p) {
+            return self
+        }
+        
+        return nil
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        guard touches.count == 1, let touch = touches.first else {
+            return
+        }
+        
+        let point = touch.location(in: self)
+        rotationCal = RotationCalculator(midPoint: rotationCenter)
+        currentPoint = point
+        previousPoint = point
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        
+        guard touches.count == 1, let touch = touches.first else {
+            return
+        }
+        
+        let point = touch.location(in: self)
+        
+        if let radians = rotationCal?.getRotationRadians(byOldPoint: previousPoint!, andNewPoint: currentPoint!) {
+            
+            guard rotateDialPlate(byRadians: radians) == true else {
+                return
+            }
+        }
+        
+        currentPoint = point
+        previousPoint = currentPoint
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        guard touches.count == 1, let touch = touches.first else {
+            return
+        }
+        
+        currentPoint = nil
+        previousPoint = nil
+        rotationCal = nil
     }
 }

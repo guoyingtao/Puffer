@@ -12,4 +12,18 @@ public struct Puffer {
     public static func createDialPlate() -> UIView {
         return RotationDial(frame: CGRect.zero)
     }
+    
+    public static func createDialPlate(withRotationCenter rotationCenter: CGPoint) -> UIView {
+        let dial = RotationDial(frame: CGRect.zero)
+        dial.rotationCenter = rotationCenter
+        return dial
+    }
+}
+
+extension Puffer {
+    struct Config {
+        var interactable = false
+        var angleLimit: Double = 0
+        
+    }
 }
