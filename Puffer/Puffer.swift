@@ -23,7 +23,7 @@ public struct Puffer {
 extension Puffer {
     struct Config {
         var interactable = false
-        var angleLimit: Double = 0
-        
+        var maxRotationAngle: Double = 0 // 0 - no limit
+        var maxShowAngle: Double = 180 // 180 - show allpod trunk delete Mantis 0.17
     }
 }

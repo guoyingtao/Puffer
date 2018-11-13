@@ -30,7 +30,7 @@ class RotationDial: UIView {
     
     var radiansLimit: CGFloat = 45 * CGFloat.pi / 180
     
-    let showRadiansLimit: CGFloat = 37.5 * CGFloat.pi / 180
+    var showRadiansLimit: CGFloat = 37.5 * CGFloat.pi / 180
     let pointerHeight: CGFloat = 8
     let spanBetweenDialPlateAndPointer: CGFloat = 6
     
@@ -43,10 +43,12 @@ class RotationDial: UIView {
     
     var config = Puffer.Config()
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, config: Puffer.Config = Puffer.Config()) {
         super.init(frame: frame)
         
         clipsToBounds = true
+        
+        showRadiansLimit = CGFloat(Puffer.Config().maxShowAngle) * CGFloat.pi / 180
         
         var dialPlateShowHeight = frame.height - pointerHeight - spanBetweenDialPlateAndPointer
         var r = dialPlateShowHeight / (1 - cos(showRadiansLimit))
@@ -163,6 +165,12 @@ extension RotationDial {
         let point = touch.location(in: self)
         
         if let radians = rotationCal?.getRotationRadians(byOldPoint: previousPoint!, andNewPoint: currentPoint!) {
+            
+            if config.maxRotationAngle != 0 {
+                guard radians <= CGFloat(config.maxRotationAngle) * CGFloat.pi / 180 else {
+                    return
+                }
+            }
             
             guard rotateDialPlate(byRadians: radians) == true else {
                 return
