@@ -17,7 +17,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         var config = Puffer.Config()
-        config.numberShowSpan = 2        
+        config.numberShowSpan = 2
+        config.rotationLimit = .limit(degree: 45)
+        config.degreeShowLimit = .limit(degree: 60)
         dial1.setup(config: config)
     }    
 }

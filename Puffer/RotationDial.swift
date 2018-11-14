@@ -54,10 +54,17 @@ public class RotationDial: UIView {
         
         self.config = config
         
-        showRadiansLimit = CGFloat(config.maxShowAngle) * CGFloat.pi / 180
-        radiansLimit = CGFloat(config.maxRotationAngle) * CGFloat.pi / 180
+        if case .limit(let degree) = config.rotationLimit {
+            radiansLimit = CGFloat(degree) * CGFloat.pi / 180
+        }
         
-        let margin: CGFloat = config.maxShowAngle == 180 ? CGFloat(config.margin) : 0
+        var margin: CGFloat = CGFloat(config.margin)
+        if case .limit(let degree) = config.degreeShowLimit {
+            margin = 0
+            showRadiansLimit = CGFloat(degree) * CGFloat.pi / 180
+        } else {
+            showRadiansLimit = CGFloat.pi
+        }
         
         var dialPlateShowHeight = frame.height - margin - pointerHeight - spanBetweenDialPlateAndPointer
         var r = dialPlateShowHeight / (1 - cos(showRadiansLimit))
@@ -184,8 +191,8 @@ extension RotationDial {
         currentPoint = point
         if let radians = rotationCal?.getRotationRadians(byOldPoint: previousPoint!, andNewPoint: currentPoint!) {
             
-            if config.maxRotationAngle != 0 {
-                guard radians <= CGFloat(config.maxRotationAngle) * CGFloat.pi / 180 else {
+            if case .limit = config.rotationLimit {
+                guard radians <= radiansLimit else {
                     return
                 }
             }
@@ -200,10 +207,6 @@ extension RotationDial {
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
-        guard touches.count == 1, let touch = touches.first else {
-            return
-        }
         
         currentPoint = nil
         previousPoint = nil

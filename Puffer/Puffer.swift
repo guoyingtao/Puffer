@@ -21,13 +21,23 @@ public struct Puffer {
 }
 
 extension Puffer {
+    public enum RotationLimitType {
+        case noLimit
+        case limit(degree: Int)
+    }
+    
+    public enum DegreeShowLimitType {
+        case noLimit
+        case limit(degree: Int)
+    }
+    
     public struct Config {
         public init() {}
         
         public var margin: Double = 10
         public var interactable = false
-        public var maxRotationAngle: Double = 0 // 0 - no limit
-        public var maxShowAngle: Double = 180 // 180 - show allpod trunk delete Mantis 0.17
+        public var rotationLimit: RotationLimitType = .noLimit
+        public var degreeShowLimit: DegreeShowLimitType = .noLimit
         public var numberShowSpan = 1
         
         public var backgroundColor: UIColor = .black
