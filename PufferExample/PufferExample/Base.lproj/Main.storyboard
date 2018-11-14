@@ -52,7 +52,11 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="Voy-qM-EdV">
-                        <barButtonItem key="leftBarButtonItem" title="Change orientation with show 60° limit" id="btw-Nu-v8c"/>
+                        <barButtonItem key="leftBarButtonItem" title="Change orientation with show 60° limit" id="btw-Nu-v8c">
+                            <connections>
+                                <action selector="changeOrientation:" destination="BYZ-38-t0r" id="QjE-qI-rkX"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Reset" id="fei-Mx-cUR">
                             <connections>
                                 <action selector="reset:" destination="BYZ-38-t0r" id="ssq-qP-TUa"/>

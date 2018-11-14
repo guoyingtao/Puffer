@@ -13,10 +13,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var dial: RotationDial!
     
+    var orientation: Puffer.Orientation = .normal
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var config = Puffer.Config()
+        let config = Puffer.Config()
         dial.setup(config: config)
     }
     
@@ -49,6 +51,24 @@ class ViewController: UIViewController {
         var config = Puffer.Config()
         config.degreeShowLimit = .limit(degree: 60)
         
+        dial.setup(config: config)
+    }
+    
+    @IBAction func changeOrientation(_ sender: Any) {
+        var config = Puffer.Config()
+        config.degreeShowLimit = .limit(degree: 60)
+        
+        if orientation == .normal {
+            config.orientation = .left
+        } else if orientation == .left {
+            config.orientation = .upsideDown
+        } else if orientation == .upsideDown {
+            config.orientation = .right
+        } else if orientation == .right {
+            config.orientation = .normal
+        }
+        
+        orientation = config.orientation
         dial.setup(config: config)
     }
 }

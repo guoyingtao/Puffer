@@ -34,7 +34,8 @@ public class RotationDial: UIView {
     let pointerHeight: CGFloat = 8
     let spanBetweenDialPlateAndPointer: CGFloat = 6
     
-    private var dialPlate: RotationAngleIndicator!
+    private var dialPlate: RotationAngleIndicator?
+    private var dialPlateHolder: UIView?
     private var pointer: CAShapeLayer = CAShapeLayer()
     
     fileprivate var rotationCal: RotationCalculator?
@@ -58,6 +59,49 @@ public class RotationDial: UIView {
             radiansLimit = CGFloat(degree) * CGFloat.pi / 180
         }
         
+        dialPlateHolder?.removeFromSuperview()
+        dialPlateHolder = getDialPlateHolder(byOrientation: config.orientation)
+        addSubview(dialPlateHolder!)
+        createDialPlate(byContainer: dialPlateHolder!)
+        setupPointer(byContainer: dialPlateHolder!)
+        
+        setDialPlateHolder(byOrientation: config.orientation)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    private func getDialPlateHolder(byOrientation orientation: Puffer.Orientation) -> UIView {
+        let view = UIView(frame: bounds)
+        
+        switch orientation {
+        case .normal, .upsideDown:
+            ()
+        case .left, .right:
+            view.frame.size = CGSize(width: view.bounds.height, height: view.bounds.width)
+        }
+        
+        return view
+    }
+    
+    private func setDialPlateHolder(byOrientation orientation: Puffer.Orientation) {
+        switch orientation {
+        case .normal:
+            ()
+        case .left:
+            dialPlateHolder?.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+            dialPlateHolder?.frame.origin = CGPoint(x: 0, y: 0)
+        case .right:
+            dialPlateHolder?.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+            dialPlateHolder?.frame.origin = CGPoint(x: 0, y: 0)
+        case .upsideDown:
+            dialPlateHolder?.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            dialPlateHolder?.frame.origin = CGPoint(x: 0, y: 0)
+        }
+    }
+    
+    private func createDialPlate(byContainer container: UIView) {
         var margin: CGFloat = CGFloat(config.margin)
         if case .limit(let degree) = config.degreeShowLimit {
             margin = 0
@@ -65,40 +109,33 @@ public class RotationDial: UIView {
         } else {
             showRadiansLimit = CGFloat.pi
         }
-        
-        var dialPlateShowHeight = frame.height - margin - pointerHeight - spanBetweenDialPlateAndPointer
+
+        var dialPlateShowHeight = container.frame.height - margin - pointerHeight - spanBetweenDialPlateAndPointer
         var r = dialPlateShowHeight / (1 - cos(showRadiansLimit))
         
-        if r * 2 * sin(showRadiansLimit) > frame.width {
-            r = (frame.width / 2) / sin(showRadiansLimit)
+        if r * 2 * sin(showRadiansLimit) > container.frame.width {
+            r = (container.frame.width / 2) / sin(showRadiansLimit)
             dialPlateShowHeight = r - r * cos(showRadiansLimit)
         }
         
         let dialPlateLength = 2 * r
-        let dialPlateFrame = CGRect(x: (frame.width - dialPlateLength) / 2, y: margin - (dialPlateLength - dialPlateShowHeight), width: dialPlateLength, height: dialPlateLength)
+        let dialPlateFrame = CGRect(x: (container.frame.width - dialPlateLength) / 2, y: margin - (dialPlateLength - dialPlateShowHeight), width: dialPlateLength, height: dialPlateLength)
         
-        if dialPlate != nil {
-            dialPlate.removeFromSuperview()
-        }
-        
+        dialPlate?.removeFromSuperview()
         dialPlate = RotationAngleIndicator(frame: dialPlateFrame, config: config)
-        addSubview(dialPlate)
+        container.addSubview(dialPlate!)
+    }
+    
+    private func setupPointer(byContainer container: UIView){
+        guard let dialPlate = dialPlate else { return }
         
-        setupPointer()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    private func setupPointer(){
         let path = CGMutablePath()
         
         let pointerEdgeLength: CGFloat = pointerHeight * sqrt(2)
         
-        let pointTop = CGPoint(x: bounds.width/2, y: dialPlate.frame.maxY + pointerHeight)
-        let pointLeft = CGPoint(x: bounds.width/2 - pointerEdgeLength / 2, y: pointTop.y + pointerHeight)
-        let pointRight = CGPoint(x: bounds.width/2 + pointerEdgeLength / 2, y: pointLeft.y)
+        let pointTop = CGPoint(x: container.bounds.width/2, y: dialPlate.frame.maxY + pointerHeight)
+        let pointLeft = CGPoint(x: container.bounds.width/2 - pointerEdgeLength / 2, y: pointTop.y + pointerHeight)
+        let pointRight = CGPoint(x: container.bounds.width/2 + pointerEdgeLength / 2, y: pointLeft.y)
         
         path.move(to: pointTop)
         path.addLine(to: pointLeft)
@@ -106,12 +143,15 @@ public class RotationDial: UIView {
         path.addLine(to: pointTop)
         pointer.fillColor = config.indicatorColor.cgColor
         pointer.path = path
-        layer.addSublayer(pointer)
+        container.layer.addSublayer(pointer)
     }
     
     func getRotationCenter() -> CGPoint {
+        guard let dialPlate = dialPlate else { return .zero }
+        
         if rotationCenter == .zero {
-            return CGPoint(x: dialPlate.frame.midX , y: dialPlate.frame.midY)
+            let p = CGPoint(x: dialPlate.bounds.midX , y: dialPlate.bounds.midY)
+            return dialPlate.convert(p, to: self)
         } else {
             return rotationCenter
         }
@@ -123,6 +163,8 @@ extension RotationDial {
     
     @discardableResult
     func rotateDialPlate(byRadians radians: CGFloat) -> Bool {
+        guard let dialPlate = dialPlate else { return false }
+        
         if case .limit = config.rotationLimit {
             if (getRotationRadians() * radians) > 0 && abs(getRotationRadians() + radians) >= radiansLimit {
                 return false
@@ -141,7 +183,7 @@ extension RotationDial {
         }
         
         func rotate() {
-            dialPlate.transform = CGAffineTransform(rotationAngle: radians)
+            dialPlate?.transform = CGAffineTransform(rotationAngle: radians)
         }
         
         if animated {
@@ -158,6 +200,8 @@ extension RotationDial {
     }
     
     public func getRotationRadians() -> CGFloat {
+        guard let dialPlate = dialPlate else { return 0 }
+        
         return CGFloat(atan2f(Float(dialPlate.transform.b), Float(dialPlate.transform.a)))
     }
     
