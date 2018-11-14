@@ -11,6 +11,13 @@ A swift rotation dial.
     <img src="Images/dial3.jpg" height="200" alt="Puffer" />
 </p>
 
+### Main feature
+
+* Show the whole dial with indicator
+* Show only part of the dial.
+* Rotation range can be limited.
+* Default rotation center if the center of the dial. You can set your own rotation center.
+* Customized colors.
 
 ## Install
 
