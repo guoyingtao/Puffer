@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         resetStatus()
         
         var config = Puffer.Config()
-        config.rotationLimit = .limit(degree: 45)
+        config.rotationLimitType = .limit(degree: 45)
 
         dial.setup(config: config)
     }
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         resetStatus()
         
         var config = Puffer.Config()
-        config.degreeShowLimit = .limit(degree: 60)
+        config.degreeShowLimitType = .limit(degree: 60)
         
         dial.setup(config: config)
     }
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         resetStatus()
         
         var config = Puffer.Config()
-        config.degreeShowLimit = .limit(degree: 60)
+        config.degreeShowLimitType = .limit(degree: 60)
         
         if orientation == .normal {
             config.orientation = .left

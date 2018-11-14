@@ -9,27 +9,17 @@
 import UIKit
 
 public struct Puffer {
-    public enum RotationCenterType {
-        case useDefault
-        case custom(CGPoint)
-    }
-    
-    public static func createDialPlate() -> UIView {
-        return RotationDial(frame: CGRect.zero)
-    }
-    
-    public static func createDialPlate(rotationCenterType: RotationCenterType) -> UIView {
-        let dial = RotationDial(frame: CGRect.zero)
-        
-        if case .custom(let center) = rotationCenterType {
-            dial.rotationCenter = center
-        }
-        
-        return dial
+    public static func createDialPlate(config: Config = Config()) -> UIView {
+        return RotationDial(frame: CGRect.zero, config: config)
     }
 }
 
 extension Puffer {
+    public enum RotationCenterType {
+        case useDefault
+        case custom(CGPoint)
+    }
+
     public enum RotationLimitType {
         case noLimit
         case limit(degree: Int)
@@ -52,8 +42,9 @@ extension Puffer {
         
         public var margin: Double = 10
         public var interactable = false
-        public var rotationLimit: RotationLimitType = .noLimit
-        public var degreeShowLimit: DegreeShowLimitType = .noLimit
+        public var rotationLimitType: RotationLimitType = .noLimit
+        public var degreeShowLimitType: DegreeShowLimitType = .noLimit
+        public var rotationCenterType: RotationCenterType = .useDefault
         public var numberShowSpan = 2
         public var orientation: Orientation = .normal
         

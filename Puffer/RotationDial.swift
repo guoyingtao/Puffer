@@ -28,10 +28,8 @@ public class RotationDial: UIView {
     
     public var didRotate: (CGFloat) -> Void = { _ in }
     
-    var rotationCenter: CGPoint = .zero
-    var radiansLimit: CGFloat = 45 * CGFloat.pi / 180
-    
-    var showRadiansLimit: CGFloat = 37.5 * CGFloat.pi / 180
+    var radiansLimit: CGFloat = CGFloat.pi
+    var showRadiansLimit: CGFloat = CGFloat.pi
     let pointerHeight: CGFloat = 8
     let spanBetweenDialPlateAndPointer: CGFloat = 6
     
@@ -56,7 +54,7 @@ public class RotationDial: UIView {
         
         self.config = config
         
-        if case .limit(let degree) = config.rotationLimit {
+        if case .limit(let degree) = config.rotationLimitType {
             radiansLimit = CGFloat(degree) * CGFloat.pi / 180
         }
         
@@ -104,7 +102,7 @@ public class RotationDial: UIView {
     
     private func createDialPlate(byContainer container: UIView) {
         var margin: CGFloat = CGFloat(config.margin)
-        if case .limit(let degree) = config.degreeShowLimit {
+        if case .limit(let degree) = config.degreeShowLimitType {
             margin = 0
             showRadiansLimit = CGFloat(degree) * CGFloat.pi / 180
         } else {
@@ -150,11 +148,11 @@ public class RotationDial: UIView {
     func getRotationCenter() -> CGPoint {
         guard let dialPlate = dialPlate else { return .zero }
         
-        if rotationCenter == .zero {
+        if case .custom(let center) = config.rotationCenterType {
+            return center
+        } else {
             let p = CGPoint(x: dialPlate.bounds.midX , y: dialPlate.bounds.midY)
             return dialPlate.convert(p, to: self)
-        } else {
-            return rotationCenter
         }
     }
 }
@@ -166,7 +164,7 @@ extension RotationDial {
     func rotateDialPlate(byRadians radians: CGFloat) -> Bool {
         guard let dialPlate = dialPlate else { return false }
         
-        if case .limit = config.rotationLimit {
+        if case .limit = config.rotationLimitType {
             if (getRotationRadians() * radians) > 0 && abs(getRotationRadians() + radians) >= radiansLimit {
                 
                 if radians > 0 {
@@ -184,7 +182,7 @@ extension RotationDial {
     }
     
     public func rotateDialPlate(toRadians radians: CGFloat, animated: Bool = false) {
-        if case .limit = config.rotationLimit {
+        if case .limit = config.rotationLimitType {
             guard abs(radians) <= radiansLimit else {
                 return
             }
@@ -219,7 +217,7 @@ extension RotationDial {
     
     public func setRotationCenter(byCenterPoint point: CGPoint, inView view: UIView) {
         let p = view.convert(point, to: self)
-        self.rotationCenter = p
+        config.rotationCenterType = .custom(p)
     }
 }
 
@@ -259,7 +257,7 @@ extension RotationDial {
         currentPoint = point
         if let radians = rotationCal?.getRotationRadians(byOldPoint: previousPoint!, andNewPoint: currentPoint!) {
             
-            if case .limit = config.rotationLimit {
+            if case .limit = config.rotationLimitType {
                 guard radians <= radiansLimit else {
                     return
                 }
