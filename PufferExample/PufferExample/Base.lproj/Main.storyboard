@@ -36,10 +36,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JN1-yQ-Wvo">
+                                <rect key="frame" x="147.5" y="253.5" width="80" height="40"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dvr-Q3-aF2">
+                                        <rect key="frame" x="38" y="18" width="4" height="4"/>
+                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="4" id="xA0-5e-xPJ"/>
+                                            <constraint firstAttribute="height" constant="4" id="zyY-aB-Qme"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Dvr-Q3-aF2" firstAttribute="centerX" secondItem="JN1-yQ-Wvo" secondAttribute="centerX" id="3KO-5l-Czf"/>
+                                    <constraint firstAttribute="width" constant="80" id="P2B-xY-qu0"/>
+                                    <constraint firstAttribute="height" constant="40" id="ewQ-Gt-YpL"/>
+                                    <constraint firstItem="Dvr-Q3-aF2" firstAttribute="centerY" secondItem="JN1-yQ-Wvo" secondAttribute="centerY" id="lx4-cW-ElX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="JN1-yQ-Wvo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="26f-M4-kPM"/>
                             <constraint firstItem="fir-vD-AdP" firstAttribute="top" secondItem="gsK-M6-tUI" secondAttribute="bottom" constant="20" id="Dah-PA-lKf"/>
+                            <constraint firstItem="gsK-M6-tUI" firstAttribute="top" secondItem="JN1-yQ-Wvo" secondAttribute="top" constant="-20" id="N2a-6p-7cD"/>
                             <constraint firstItem="fir-vD-AdP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SAq-0M-ClY"/>
                             <constraint firstItem="gsK-M6-tUI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WjM-9d-b2f"/>
                             <constraint firstItem="gsK-M6-tUI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="toE-ay-aFI"/>
@@ -52,14 +74,19 @@
                                 <action selector="color:" destination="BYZ-38-t0r" id="A9j-hM-4ZC"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Rotate 45° Limit" id="Yyc-To-zAj">
+                        <barButtonItem title="Limit 45°" id="Yyc-To-zAj">
                             <connections>
                                 <action selector="rotateLimit:" destination="BYZ-38-t0r" id="mPh-tN-BSB"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Show 60° Limit" id="Yaj-GW-fyV">
+                        <barButtonItem title="Show 60°" id="Yaj-GW-fyV">
                             <connections>
                                 <action selector="showLimit:" destination="BYZ-38-t0r" id="uxX-4p-b7W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="CustomCenter" id="2OG-fc-Y7Z">
+                            <connections>
+                                <action selector="testCenter:" destination="BYZ-38-t0r" id="p0h-ax-ZrT"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -77,6 +104,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="customRotationView" destination="JN1-yQ-Wvo" id="uVO-4u-iSa"/>
                         <outlet property="dial" destination="gsK-M6-tUI" id="4aa-ew-wPh"/>
                         <outlet property="roateAngleValue" destination="fir-vD-AdP" id="UpD-OJ-Qdc"/>
                     </connections>

@@ -216,6 +216,11 @@ extension RotationDial {
     public func getRotationDegrees() -> CGFloat {
         return getRotationRadians() * 180 / CGFloat.pi
     }
+    
+    public func setRotationCenter(byCenterPoint point: CGPoint, inView view: UIView) {
+        let p = view.convert(point, to: self)
+        self.rotationCenter = p
+    }
 }
 
 extension RotationDial {

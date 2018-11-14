@@ -13,26 +13,36 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var dial: RotationDial!
     @IBOutlet weak var roateAngleValue: UILabel!
+    @IBOutlet weak var customRotationView: UIView!
     
     var orientation: Puffer.Orientation = .normal
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        customRotationView.isHidden = true
+        
         let config = Puffer.Config()
         dial.setup(config: config)
         
         dial.didRotate = {[weak self] angle in
-            self?.roateAngleValue.text = String(format:"%0.02f°", angle)
+            guard let self = self else { return }
+            
+            self.roateAngleValue.text = String(format:"%0.02f°", angle)
+            
+            if self.customRotationView.isHidden == false {
+                self.customRotationView.transform = CGAffineTransform(rotationAngle: self.dial.getRotationRadians())
+            }
         }
     }
     
-    private func resetAngleValueLabel() {
+    private func resetStatus() {
+        customRotationView.isHidden = true
         roateAngleValue.text = "0°"
     }
     
     @IBAction func color(_ sender: Any) {
-        resetAngleValueLabel()
+        resetStatus()
         
         var config = Puffer.Config()
         config.numberShowSpan = 2
@@ -47,14 +57,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func reset(_ sender: Any) {
-        resetAngleValueLabel()
+        resetStatus()
         
         let config = Puffer.Config()
         dial.setup(config: config)
     }
     
     @IBAction func rotateLimit(_ sender: Any) {
-        resetAngleValueLabel()
+        resetStatus()
         
         var config = Puffer.Config()
         config.rotationLimit = .limit(degree: 45)
@@ -63,7 +73,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showLimit(_ sender: Any) {
-        resetAngleValueLabel()
+        resetStatus()
         
         var config = Puffer.Config()
         config.degreeShowLimit = .limit(degree: 60)
@@ -72,7 +82,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeOrientation(_ sender: Any) {
-        resetAngleValueLabel()
+        resetStatus()
         
         var config = Puffer.Config()
         config.degreeShowLimit = .limit(degree: 60)
@@ -88,6 +98,18 @@ class ViewController: UIViewController {
         }
         
         orientation = config.orientation
+        dial.setup(config: config)
+    }
+    
+    
+    @IBAction func testCenter(_ sender: Any) {
+        resetStatus()
+        customRotationView.transform = .identity
+        customRotationView.isHidden = false
+        
+        dial.setRotationCenter(byCenterPoint: customRotationView.center, inView: self.view)
+        
+        let config = Puffer.Config()
         dial.setup(config: config)
     }
 }

@@ -6,16 +6,25 @@
 //  Copyright © 2018 Echo. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public struct Puffer {
+    public enum RotationCenterType {
+        case useDefault
+        case custom(CGPoint)
+    }
+    
     public static func createDialPlate() -> UIView {
         return RotationDial(frame: CGRect.zero)
     }
     
-    public static func createDialPlate(withRotationCenter rotationCenter: CGPoint) -> UIView {
+    public static func createDialPlate(rotationCenterType: RotationCenterType) -> UIView {
         let dial = RotationDial(frame: CGRect.zero)
-        dial.rotationCenter = rotationCenter
+        
+        if case .custom(let center) = rotationCenterType {
+            dial.rotationCenter = center
+        }
+        
         return dial
     }
 }
