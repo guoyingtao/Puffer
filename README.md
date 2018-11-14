@@ -11,6 +11,11 @@ A swift rotation dial.
     <img src="Images/dial3.jpg" height="200" alt="Puffer" />
 </p>
 
+You can use this tool to mimic a rotation dial just like what Photo.app does
+<p align="center">
+    <img src="Images/Puffer demo.jpg" height="200" alt="Puffer demo"
+</p>    
+
 ### Main feature
 
 * Show the whole dial with indicator
