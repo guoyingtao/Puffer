@@ -9,7 +9,7 @@
 import UIKit
 
 public struct Puffer {
-    public static func createDialPlate(config: Config = Config()) -> UIView {
+    public static func createDial(config: Config = Config()) -> UIView {
         return RotationDial(frame: CGRect.zero, config: config)
     }
 }
