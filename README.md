@@ -5,6 +5,13 @@
 # Puffer
 A swift rotation dial.
 
+<p align="center">
+    <img src="Images/dial1.jpg" height="200" alt="Puffer" />
+    <img src="Images/dial2.jpg" height="200" alt="Puffer" />
+    <img src="Images/dial3.jpg" height="200" alt="Puffer" />
+</p>
+
+
 ## Install
 
 ### CocoaPods
