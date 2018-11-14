@@ -33,7 +33,7 @@ public class RotationDial: UIView {
     let pointerHeight: CGFloat = 8
     let spanBetweenDialPlateAndPointer: CGFloat = 6
     
-    private var dialPlate: RotationAngleIndicator?
+    private var dialPlate: RotationDialPlate?
     private var dialPlateHolder: UIView?
     private var pointer: CAShapeLayer = CAShapeLayer()
     
@@ -121,7 +121,7 @@ public class RotationDial: UIView {
         let dialPlateFrame = CGRect(x: (container.frame.width - dialPlateLength) / 2, y: margin - (dialPlateLength - dialPlateShowHeight), width: dialPlateLength, height: dialPlateLength)
         
         dialPlate?.removeFromSuperview()
-        dialPlate = RotationAngleIndicator(frame: dialPlateFrame, config: config)
+        dialPlate = RotationDialPlate(frame: dialPlateFrame, config: config)
         container.addSubview(dialPlate!)
     }
     

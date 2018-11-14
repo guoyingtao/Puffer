@@ -37,6 +37,11 @@ extension Puffer {
         case upsideDown
     }
     
+    public enum Theme {
+        case dark
+        case light
+    }
+    
     public struct Config {
         public init() {}
         
@@ -54,5 +59,26 @@ extension Puffer {
         public var indicatorColor: UIColor = .lightGray
         public var numberColor: UIColor = .lightGray
         public var centerAxisColor: UIColor = .lightGray
+        
+        public var theme: Theme = .dark {
+            didSet {
+                switch theme {
+                case .dark:
+                    backgroundColor = .black
+                    bigScaleColor = .lightGray
+                    smallScaleColor = .lightGray
+                    indicatorColor = .lightGray
+                    numberColor = .lightGray
+                    centerAxisColor = .lightGray
+                case .light:
+                    backgroundColor = .white
+                    bigScaleColor = .darkGray
+                    smallScaleColor = .darkGray
+                    indicatorColor = .darkGray
+                    numberColor = .darkGray
+                    centerAxisColor = .darkGray
+                }
+            }
+        }
     }
 }
