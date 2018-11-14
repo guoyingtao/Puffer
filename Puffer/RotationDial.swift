@@ -77,17 +77,18 @@ public class RotationDial: UIView {
         let dialPlateLength = 2 * r
         let dialPlateFrame = CGRect(x: (frame.width - dialPlateLength) / 2, y: margin - (dialPlateLength - dialPlateShowHeight), width: dialPlateLength, height: dialPlateLength)
         
+        if dialPlate != nil {
+            dialPlate.removeFromSuperview()
+        }
+        
         dialPlate = RotationAngleIndicator(frame: dialPlateFrame, config: config)
         addSubview(dialPlate)
         
         setupPointer()
-        
-        print("frame is \(frame)")
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        setup(config: config)
     }
     
     private func setupPointer(){
@@ -103,7 +104,7 @@ public class RotationDial: UIView {
         path.addLine(to: pointLeft)
         path.addLine(to: pointRight)
         path.addLine(to: pointTop)
-        pointer.fillColor = UIColor.lightGray.cgColor
+        pointer.fillColor = config.indicatorColor.cgColor
         pointer.path = path
         layer.addSublayer(pointer)
     }
@@ -115,10 +116,14 @@ public class RotationDial: UIView {
             return rotationCenter
         }
     }
+}
+
+// Public API
+extension RotationDial {
     
     @discardableResult
     func rotateDialPlate(byRadians radians: CGFloat) -> Bool {
-        if radiansLimit > 0 {
+        if case .limit = config.rotationLimit {
             if (getRotationRadians() * radians) > 0 && abs(getRotationRadians() + radians) >= radiansLimit {
                 return false
             }
@@ -128,9 +133,11 @@ public class RotationDial: UIView {
         return true
     }
     
-    func rotateDialPlate(toRadians radians: CGFloat, animated: Bool = false) {
-        guard abs(radians) < radiansLimit else {
-            return
+    public func rotateDialPlate(toRadians radians: CGFloat, animated: Bool = false) {
+        if case .limit = config.rotationLimit {
+            guard abs(radians) < radiansLimit else {
+                return
+            }
         }
         
         func rotate() {
@@ -146,11 +153,15 @@ public class RotationDial: UIView {
         }
     }
     
-    func getRotationRadians() -> CGFloat {
+    public func resetAngle(animated: Bool) {
+        rotateDialPlate(toRadians: 0, animated: animated)
+    }
+    
+    public func getRotationRadians() -> CGFloat {
         return CGFloat(atan2f(Float(dialPlate.transform.b), Float(dialPlate.transform.a)))
     }
     
-    func getRotationDegrees() -> CGFloat {
+    public func getRotationDegrees() -> CGFloat {
         return getRotationRadians() * 180 / CGFloat.pi
     }
 }

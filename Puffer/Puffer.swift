@@ -31,6 +31,13 @@ extension Puffer {
         case limit(degree: Int)
     }
     
+    public enum Orientation {
+        case normal
+        case right
+        case left
+        case upsideDown
+    }
+    
     public struct Config {
         public init() {}
         
@@ -38,7 +45,8 @@ extension Puffer {
         public var interactable = false
         public var rotationLimit: RotationLimitType = .noLimit
         public var degreeShowLimit: DegreeShowLimitType = .noLimit
-        public var numberShowSpan = 1
+        public var numberShowSpan = 2
+        public var orientation: Orientation = .normal
         
         public var backgroundColor: UIColor = .black
         public var bigScaleColor: UIColor = .lightGray

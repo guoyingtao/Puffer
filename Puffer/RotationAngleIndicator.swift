@@ -69,7 +69,7 @@ class RotationAngleIndicator: UIView {
         let mark = CAShapeLayer()
         mark.frame = CGRect(x: 0, y: 0, width: 2, height: 2)
         mark.path = UIBezierPath(ovalIn: mark.bounds).cgPath
-        mark.fillColor = UIColor.lightGray.cgColor
+        mark.fillColor = config.smallScaleColor.cgColor
         
         return mark
     }
@@ -78,13 +78,12 @@ class RotationAngleIndicator: UIView {
         let mark = CAShapeLayer()
         mark.frame = CGRect(x: 0, y: 0, width: 4, height: 4)
         mark.path = UIBezierPath(ovalIn: mark.bounds).cgPath
-        mark.fillColor = UIColor.lightGray.cgColor
+        mark.fillColor = config.bigScaleColor.cgColor
         
         return mark
     }
     
     private func setupAngleNumber() {
-        let numberColor = UIColor.lightGray
         let numberFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption2)
         
         let cgFont = CTFontCreateWithName(numberFont.fontName as CFString, numberFont.pointSize/2, nil)
@@ -112,7 +111,7 @@ class RotationAngleIndicator: UIView {
             numberLayer.font = cgFont
             let angle = (i > bigDegreeScaleNumber / 2 ? i - bigDegreeScaleNumber : i) * 10
             numberLayer.string = "\(angle)"
-            numberLayer.foregroundColor = numberColor.cgColor
+            numberLayer.foregroundColor = config.numberColor.cgColor
             
             let stepChange = CGFloat(i) * step
             numberLayer.position = CGVector(from:origin, to:startPos).rotate(-stepChange).add(origin.vector).point.checked
