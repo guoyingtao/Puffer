@@ -10,7 +10,7 @@ A swift rotation dial.
 ### CocoaPods
 
 ```ruby
-pod 'Puffer', '~> 0.1'
+pod 'Puffer', '~> 0.11'
 ```
 You may also need the code below in your pod file if compile errors happen because of different swift version.
 
