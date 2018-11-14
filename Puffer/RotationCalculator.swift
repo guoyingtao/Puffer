@@ -24,7 +24,6 @@ extension CGFloat {
     var deg2rad:CGFloat {
         return self.radians
     }
-    
 }
 
 class RotationCalculator {
