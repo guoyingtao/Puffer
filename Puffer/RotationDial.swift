@@ -26,8 +26,9 @@ import UIKit
 
 public class RotationDial: UIView {
     
-    var rotationCenter: CGPoint = .zero
+    public var didRotate: (CGFloat) -> Void = { _ in }
     
+    var rotationCenter: CGPoint = .zero
     var radiansLimit: CGFloat = 45 * CGFloat.pi / 180
     
     var showRadiansLimit: CGFloat = 37.5 * CGFloat.pi / 180
@@ -167,6 +168,13 @@ extension RotationDial {
         
         if case .limit = config.rotationLimit {
             if (getRotationRadians() * radians) > 0 && abs(getRotationRadians() + radians) >= radiansLimit {
+                
+                if radians > 0 {
+                    rotateDialPlate(toRadians: radiansLimit)
+                } else {
+                    rotateDialPlate(toRadians: -radiansLimit)
+                }
+                
                 return false
             }
         }
@@ -177,7 +185,7 @@ extension RotationDial {
     
     public func rotateDialPlate(toRadians radians: CGFloat, animated: Bool = false) {
         if case .limit = config.rotationLimit {
-            guard abs(radians) < radiansLimit else {
+            guard abs(radians) <= radiansLimit else {
                 return
             }
         }
@@ -253,11 +261,14 @@ extension RotationDial {
             }
             
             guard rotateDialPlate(byRadians: radians) == true else {
+                didRotate(getRotationDegrees())
                 return
             }
         }
         
         previousPoint = currentPoint
+        
+        didRotate(getRotationDegrees())
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
