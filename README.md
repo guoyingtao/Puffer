@@ -13,7 +13,7 @@ A swift rotation dial.
 
 You can use this tool to mimic a rotation dial just like what Photo.app does
 <p align="center">
-    <img src="Images/Puffer demo.jpg" height="200" alt="Puffer demo"
+    <img src="Images/Puffer demo.jpg" height="100" alt="Puffer demo"
 </p>    
 
 ### Main feature
