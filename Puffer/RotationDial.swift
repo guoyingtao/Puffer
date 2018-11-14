@@ -24,7 +24,7 @@
 
 import UIKit
 
-class RotationDial: UIView {
+public class RotationDial: UIView {
     
     var rotationCenter: CGPoint = .zero
     
@@ -43,32 +43,44 @@ class RotationDial: UIView {
     
     var config = Puffer.Config()
     
-    init(frame: CGRect, config: Puffer.Config = Puffer.Config()) {
-        super.init(frame: frame)
-        
+    public init(frame: CGRect, config: Puffer.Config = Puffer.Config()) {
+        super.init(frame: frame)        
+        setup(config: config)
+    }
+    
+    public func setup(config: Puffer.Config = Puffer.Config()) {
         clipsToBounds = true
+        backgroundColor = config.backgroundColor
         
-        showRadiansLimit = CGFloat(Puffer.Config().maxShowAngle) * CGFloat.pi / 180
+        self.config = config
         
-        var dialPlateShowHeight = frame.height - pointerHeight - spanBetweenDialPlateAndPointer
+        showRadiansLimit = CGFloat(config.maxShowAngle) * CGFloat.pi / 180
+        radiansLimit = CGFloat(config.maxRotationAngle) * CGFloat.pi / 180
+        
+        let margin: CGFloat = config.maxShowAngle == 180 ? CGFloat(config.margin) : 0
+        
+        var dialPlateShowHeight = frame.height - margin - pointerHeight - spanBetweenDialPlateAndPointer
         var r = dialPlateShowHeight / (1 - cos(showRadiansLimit))
         
         if r * 2 * sin(showRadiansLimit) > frame.width {
             r = (frame.width / 2) / sin(showRadiansLimit)
             dialPlateShowHeight = r - r * cos(showRadiansLimit)
         }
-
-        let dialPlateLength = 2 * r
-        let dialPlateFrame = CGRect(x: (frame.width - dialPlateLength) / 2, y: -(dialPlateLength - dialPlateShowHeight), width: dialPlateLength, height: dialPlateLength)
         
-        dialPlate = RotationAngleIndicator(frame: dialPlateFrame)
+        let dialPlateLength = 2 * r
+        let dialPlateFrame = CGRect(x: (frame.width - dialPlateLength) / 2, y: margin - (dialPlateLength - dialPlateShowHeight), width: dialPlateLength, height: dialPlateLength)
+        
+        dialPlate = RotationAngleIndicator(frame: dialPlateFrame, config: config)
         addSubview(dialPlate)
         
         setupPointer()
+        
+        print("frame is \(frame)")
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+//        setup(config: config)
     }
     
     private func setupPointer(){
@@ -90,18 +102,23 @@ class RotationDial: UIView {
     }
     
     func getRotationCenter() -> CGPoint {
-        return CGPoint(x: dialPlate.frame.midX , y: dialPlate.frame.midY)
+        if rotationCenter == .zero {
+            return CGPoint(x: dialPlate.frame.midX , y: dialPlate.frame.midY)
+        } else {
+            return rotationCenter
+        }
     }
     
     @discardableResult
     func rotateDialPlate(byRadians radians: CGFloat) -> Bool {
+        if radiansLimit > 0 {
+            if (getRotationRadians() * radians) > 0 && abs(getRotationRadians() + radians) >= radiansLimit {
+                return false
+            }
+        }
         
-        if (getRotationRadians() * radians) > 0 && abs(getRotationRadians() + radians) >= radiansLimit {
-            return false
-        } else {
-            dialPlate.transform = dialPlate.transform.rotated(by: radians)
-            return true
-        }        
+        dialPlate.transform = dialPlate.transform.rotated(by: radians)
+        return true
     }
     
     func rotateDialPlate(toRadians radians: CGFloat, animated: Bool = false) {
@@ -132,7 +149,7 @@ class RotationDial: UIView {
 }
 
 extension RotationDial {
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let p = convert(point, to: self)
         
         if bounds.contains(p) {
@@ -142,7 +159,7 @@ extension RotationDial {
         return nil
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
         guard touches.count == 1, let touch = touches.first else {
@@ -150,12 +167,12 @@ extension RotationDial {
         }
         
         let point = touch.location(in: self)
-        rotationCal = RotationCalculator(midPoint: rotationCenter)
+        rotationCal = RotationCalculator(midPoint: getRotationCenter())
         currentPoint = point
         previousPoint = point
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         
         guard touches.count == 1, let touch = touches.first else {
@@ -164,6 +181,7 @@ extension RotationDial {
         
         let point = touch.location(in: self)
         
+        currentPoint = point
         if let radians = rotationCal?.getRotationRadians(byOldPoint: previousPoint!, andNewPoint: currentPoint!) {
             
             if config.maxRotationAngle != 0 {
@@ -177,11 +195,10 @@ extension RotationDial {
             }
         }
         
-        currentPoint = point
         previousPoint = currentPoint
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
         guard touches.count == 1, let touch = touches.first else {

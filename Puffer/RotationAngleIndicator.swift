@@ -53,8 +53,11 @@ class RotationAngleIndicator: UIView {
         return r
     }()
     
-    override init(frame: CGRect) {
+    var config = Puffer.Config()
+    
+    init(frame: CGRect, config: Puffer.Config = Puffer.Config()) {
         super.init(frame: frame)
+        self.config = config
         setup()
     }
     
@@ -96,8 +99,13 @@ class RotationAngleIndicator: UIView {
         let startPos = CGPoint(x: numberPlateLayer.bounds.midX, y: numberPlateLayer.bounds.maxY - margin - spaceBetweenScaleAndNumber)
         let step = (2 * CGFloat.pi) / CGFloat(bigDegreeScaleNumber)
         for i in (0 ..< bigDegreeScaleNumber){
+            
+            guard i % config.numberShowSpan == 0 else {
+                continue
+            }
+            
             let numberLayer = CATextLayer()
-            numberLayer.bounds.size = CGSize(width: 20, height: 15)
+            numberLayer.bounds.size = CGSize(width: 30, height: 15)
             numberLayer.fontSize = numberFont.pointSize
             numberLayer.alignmentMode = CATextLayerAlignmentMode.center
             numberLayer.contentsScale = UIScreen.main.scale
@@ -135,24 +143,32 @@ class RotationAngleIndicator: UIView {
         self.layer.addSublayer(bigDotLayer)
     }
     
+    private func setCenterPart() {
+        let layer = CAShapeLayer()
+        let r: CGFloat = 4
+        layer.frame = CGRect(x: (self.layer.bounds.width - r) / 2 , y: (self.layer.bounds.height - r) / 2, width: r, height: r)
+        layer.path = UIBezierPath(ovalIn: layer.bounds).cgPath
+        layer.fillColor = config.centerAxisColor.cgColor
+        
+        self.layer.addSublayer(layer)
+    }
+    
     private func setup() {
         setupSmallScaleMarks()
         setupBigScaleMarks()
         setupAngleNumber()
+        setCenterPart()
     }
 
 }
 
 extension CALayer{
-    var size:CGSize{
+    var size: CGSize {
         get{ return self.bounds.size.checked }
         set{ return self.bounds.size = newValue }
     }
-    var occupation:(CGSize, CGPoint) {
-        get{ return (size, self.center.checked) }
-        set{ size = newValue.0; position = newValue.1 }
-    }
-    var center:CGPoint{
+
+    var center: CGPoint {
         get{ return self.bounds.center.checked }
     }
 }

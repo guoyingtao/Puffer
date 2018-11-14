@@ -13,7 +13,7 @@
 		5F3BE1D2219A4AB8005C4BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BE1D1219A4AB8005C4BD8 /* Assets.xcassets */; };
 		5F3BE1D5219A4AB8005C4BD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BE1D3219A4AB8005C4BD8 /* LaunchScreen.storyboard */; };
 		5F3BE1E0219A4AB8005C4BD8 /* PufferExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BE1DF219A4AB8005C4BD8 /* PufferExampleTests.swift */; };
-		5F3BE1EC219A4B57005C4BD8 /* Puffer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3BE1EB219A4B57005C4BD8 /* Puffer.framework */; };
+		5F3BE1F9219BAB27005C4BD8 /* Puffer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3BE1F8219BAB27005C4BD8 /* Puffer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,7 @@
 		5F3BE1DB219A4AB8005C4BD8 /* PufferExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PufferExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3BE1DF219A4AB8005C4BD8 /* PufferExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PufferExampleTests.swift; sourceTree = "<group>"; };
 		5F3BE1E1219A4AB8005C4BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5F3BE1EB219A4B57005C4BD8 /* Puffer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Puffer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F3BE1F8219BAB27005C4BD8 /* Puffer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Puffer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F3BE1EC219A4B57005C4BD8 /* Puffer.framework in Frameworks */,
+				5F3BE1F9219BAB27005C4BD8 /* Puffer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +103,7 @@
 		5F3BE1EA219A4B57005C4BD8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5F3BE1EB219A4B57005C4BD8 /* Puffer.framework */,
+				5F3BE1F8219BAB27005C4BD8 /* Puffer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -371,6 +371,7 @@
 		5F3BE1E5219A4AB8005C4BD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V26Q55U3S;
@@ -389,6 +390,7 @@
 		5F3BE1E6219A4AB8005C4BD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V26Q55U3S;
