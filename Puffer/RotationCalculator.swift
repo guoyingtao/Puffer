@@ -12,16 +12,16 @@ import UIKit
 let π = CGFloat.pi
 
 extension CGFloat {
-    var degrees:CGFloat {
+    var degrees: CGFloat {
         return self * 180 / π;
     }
-    var radians:CGFloat {
+    var radians: CGFloat {
         return self * π / 180;
     }
-    var rad2deg:CGFloat {
+    var rad2deg: CGFloat {
         return self.degrees
     }
-    var deg2rad:CGFloat {
+    var deg2rad: CGFloat {
         return self.radians
     }
 }
@@ -32,10 +32,10 @@ class RotationCalculator {
     var midPoint = CGPoint.zero
     
     // minimal distance from midpoint
-    var innerRadius:CGFloat?
+    var innerRadius: CGFloat?
     
     // maximal distance to midpoint
-    var outerRadius:CGFloat?
+    var outerRadius: CGFloat?
     
     // relative rotation for current gesture (in radians)
     var rotation: CGFloat? {
@@ -56,7 +56,7 @@ class RotationCalculator {
     }
     
     // absolute angle for current gesture (in radians)
-    var angle:CGFloat? {
+    var angle: CGFloat? {
         if let nowPoint = self.currentPoint {
             return self.angleForPoint(point: nowPoint)
         }
@@ -73,36 +73,34 @@ class RotationCalculator {
         return nil
     }
     
-    private var currentPoint:CGPoint?
-    private var previousPoint:CGPoint?
+    private var currentPoint: CGPoint?
+    private var previousPoint: CGPoint?
     
     init(midPoint: CGPoint) {
         self.midPoint = midPoint
     }
     
-    private func distanceBetween(pointA:CGPoint, andPointB pointB:CGPoint) -> CGFloat {
+    private func distanceBetween(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
         let dx = Float(pointA.x - pointB.x)
         let dy = Float(pointA.y - pointB.y)
         return CGFloat(sqrtf(dx*dx + dy*dy))
     }
     
-    private func angleForPoint(point:CGPoint) -> CGFloat {
+    private func angleForPoint(point: CGPoint) -> CGFloat {
         var angle = CGFloat(-atan2f(Float(point.x - midPoint.x), Float(point.y - midPoint.y))) + π/2
         
-        
         if (angle < 0) {
-            angle += π*2;
+            angle += π*2
         }
-        
         
         return angle
     }
     
-    private func angleBetween(pointA:CGPoint, andPointB pointB:CGPoint) -> CGFloat {
+    private func angleBetween(pointA: CGPoint, andPointB pointB: CGPoint) -> CGFloat {
         return angleForPoint(point: pointA) - angleForPoint(point: pointB)
     }
     
-    func getRotationRadians(byOldPoint p1:CGPoint, andNewPoint p2: CGPoint) -> CGFloat {
+    func getRotationRadians(byOldPoint p1: CGPoint, andNewPoint p2: CGPoint) -> CGFloat {
         self.previousPoint = p1
         self.currentPoint = p2
         return rotation ?? 0
