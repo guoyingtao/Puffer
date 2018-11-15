@@ -22,8 +22,7 @@ class ViewController: UIViewController {
         
         customRotationView.isHidden = true
         
-        var config = Puffer.Config()
-        config.theme = .light
+        let config = Puffer.Config()
         dial.setup(config: config)
         
         dial.didRotate = {[weak self] angle in

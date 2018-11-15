@@ -29,7 +29,7 @@ You can use this tool to mimic a rotation dial just like what Photo.app does
 ### CocoaPods
 
 ```ruby
-pod 'Puffer', '~> 0.11'
+pod 'Puffer', '~> 0.12'
 ```
 You may also need the code below in your pod file if compile errors happen because of different swift version.
 
