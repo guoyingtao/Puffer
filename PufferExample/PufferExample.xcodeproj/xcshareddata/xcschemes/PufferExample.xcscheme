@@ -20,20 +20,6 @@
                ReferencedContainer = "container:PufferExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5F3BE19B219A48CA005C4BD8"
-               BuildableName = "Puffer.framework"
-               BlueprintName = "Puffer"
-               ReferencedContainer = "container:../Puffer.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:PufferExample/PufferExample.xcodeproj">
+      location = "group:PufferExample.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Puffer.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
