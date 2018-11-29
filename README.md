@@ -2,6 +2,12 @@
     <img src="Images/puffer.png" height="120" max-width="90%" alt="Mantis" />
 </p>
 
+<p align="center">
+    <img src="https://img.shields.io/badge/swift-4.2-orange.svg" alt="swift 4.2 badge" />
+    <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg" alt="platform iOS badge" />
+    <img src="https://img.shields.io/badge/license-MIT-black.svg" alt="license MIT badge" />   
+</p>
+
 # Puffer
 A swift rotation dial.
 
