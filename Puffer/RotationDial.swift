@@ -24,10 +24,11 @@
 
 import UIKit
 
-private let pointerHeight: CGFloat = 8
-private let spanBetweenDialPlateAndPointer: CGFloat = 6
-
+@IBDesignable
 public class RotationDial: UIView {
+    @IBInspectable public var pointerHeight: CGFloat = 8
+    @IBInspectable public var spanBetweenDialPlateAndPointer: CGFloat = 6
+    @IBInspectable public var pointerWidth: CGFloat = 8 * sqrt(2)
     
     public var didRotate: (_ angle: CGAngle) -> Void = { _ in }
     public var config = Config()
@@ -37,12 +38,18 @@ public class RotationDial: UIView {
     private var dialPlate: RotationDialPlate?
     private var dialPlateHolder: UIView?
     private var pointer: CAShapeLayer = CAShapeLayer()
-    
-    var viewModel = RotationDialViewModel()
     private var rotationKVO: NSKeyValueObservation?
     private var pointKVO: NSKeyValueObservation?
+
+    var viewModel = RotationDialViewModel()
     
-    public init(frame: CGRect, config: Config = Config()) {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.config = Config()
+        setup()
+    }
+    
+    public init(frame: CGRect, config: Config) {
         super.init(frame: frame)
         setup()
     }
@@ -62,7 +69,7 @@ extension RotationDial {
         dialPlateHolder = getDialPlateHolder(by: config.orientation)
         addSubview(dialPlateHolder!)
         createDialPlate(in: dialPlateHolder!)
-        setupPointer(in: dialPlateHolder!)        
+        setupPointer(in: dialPlateHolder!)
         setDialPlateHolder(by: config.orientation)
     }
     
@@ -148,9 +155,9 @@ extension RotationDial {
         guard let dialPlate = dialPlate else { return }
         
         let path = CGMutablePath()
-        let pointerEdgeLength: CGFloat = pointerHeight * sqrt(2)
+        let pointerEdgeLength: CGFloat = pointerWidth
         
-        let pointTop = CGPoint(x: container.bounds.width/2, y: dialPlate.frame.maxY + pointerHeight)
+        let pointTop = CGPoint(x: container.bounds.width/2, y: dialPlate.frame.maxY + spanBetweenDialPlateAndPointer)
         let pointLeft = CGPoint(x: container.bounds.width/2 - pointerEdgeLength / 2, y: pointTop.y + pointerHeight)
         let pointRight = CGPoint(x: container.bounds.width/2 + pointerEdgeLength / 2, y: pointLeft.y)
         
