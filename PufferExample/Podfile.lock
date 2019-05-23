@@ -1,16 +1,3 @@
-PODS:
-  - Puffer (0.12)
+PODFILE CHECKSUM: dd4c18e45fe7c8b736b64bf983dd36e4ba03b638
 
-DEPENDENCIES:
-  - Puffer (from `../`)
-
-EXTERNAL SOURCES:
-  Puffer:
-    :path: "../"
-
-SPEC CHECKSUMS:
-  Puffer: 106f62dc5d9491412d20cb4f817520cd01cd69be
-
-PODFILE CHECKSUM: bb6d0ff590523288e3b3bdb0adba620455bb138f
-
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.1

@@ -1,6 +1,6 @@
 //
 //  AngleDashboard.swift
-//  Mantis
+//  Puffer
 //
 //  Created by Echo on 10/21/18.
 //  Copyright © 2018 Echo. All rights reserved.
@@ -24,38 +24,36 @@
 
 import UIKit
 
+private let pointerHeight: CGFloat = 8
+private let spanBetweenDialPlateAndPointer: CGFloat = 6
+
 public class RotationDial: UIView {
     
     public var didRotate: (CGFloat) -> Void = { _ in }
+    public var config = Config()
     
-    var radiansLimit: CGFloat = CGFloat.pi
-    var showRadiansLimit: CGFloat = CGFloat.pi
-    let pointerHeight: CGFloat = 8
-    let spanBetweenDialPlateAndPointer: CGFloat = 6
-    
+    private var radiansLimit: CGFloat = CGFloat.pi
+    private var showRadiansLimit: CGFloat = CGFloat.pi
     private var dialPlate: RotationDialPlate?
     private var dialPlateHolder: UIView?
     private var pointer: CAShapeLayer = CAShapeLayer()
+    private var viewModel = RotationDialViewModel()
+    private var rotationKVO: NSKeyValueObservation?
+    private var pointKVO: NSKeyValueObservation?
     
-    fileprivate var rotationCal: RotationCalculator?
-    fileprivate var currentPoint: CGPoint?
-    fileprivate var previousPoint: CGPoint?
-    
-    var config = Puffer.Config()
-    
-    public init(frame: CGRect, config: Puffer.Config = Puffer.Config()) {
-        super.init(frame: frame)        
+    public init(frame: CGRect, config: Config = Config()) {
+        super.init(frame: frame)
         setup(config: config)
     }
     
-    public func setup(config: Puffer.Config = Puffer.Config()) {
+    public func setup(config: Config = Config()) {
         clipsToBounds = true
         backgroundColor = config.backgroundColor
         
         self.config = config
         
-        if case .limit(let degree) = config.rotationLimitType {
-            radiansLimit = CGFloat(degree) * CGFloat.pi / 180
+        if case .limit(let angle) = config.rotationLimitType {
+            radiansLimit = angle.radians
         }
         
         dialPlateHolder?.removeFromSuperview()
@@ -65,13 +63,35 @@ public class RotationDial: UIView {
         setupPointer(byContainer: dialPlateHolder!)
         
         setDialPlateHolder(byOrientation: config.orientation)
+        
+        rotationKVO = viewModel.observe(\.rotationAngle,
+                                        options: [.old, .new]
+                      ) { [weak self] _, changed in
+                        guard let angle = changed.newValue else { return }
+                        self?.handleRotation(angle: angle)
+                      }
+        
+        let rotationCenter = getRotationCenter()
+        viewModel.makeRotationCalculator(by: rotationCenter)
+    }
+    
+    func handleRotation(angle: CGAngle) {
+        if case .limit = config.rotationLimitType {
+            guard angle.radians <= radiansLimit else {
+                return
+            }
+        }
+        
+        if rotateDialPlate(byRadians: angle.radians) {
+            didRotate(getRotationDegrees())
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    private func getDialPlateHolder(byOrientation orientation: Puffer.Orientation) -> UIView {
+    private func getDialPlateHolder(byOrientation orientation: Orientation) -> UIView {
         let view = UIView(frame: bounds)
         
         switch orientation {
@@ -84,7 +104,7 @@ public class RotationDial: UIView {
         return view
     }
     
-    private func setDialPlateHolder(byOrientation orientation: Puffer.Orientation) {
+    private func setDialPlateHolder(byOrientation orientation: Orientation) {
         switch orientation {
         case .normal:
             ()
@@ -102,9 +122,9 @@ public class RotationDial: UIView {
     
     private func createDialPlate(byContainer container: UIView) {
         var margin: CGFloat = CGFloat(config.margin)
-        if case .limit(let degree) = config.degreeShowLimitType {
+        if case .limit(let angle) = config.angleShowLimitType {
             margin = 0
-            showRadiansLimit = CGFloat(degree) * CGFloat.pi / 180
+            showRadiansLimit = angle.radians
         } else {
             showRadiansLimit = CGFloat.pi
         }
@@ -221,10 +241,10 @@ extension RotationDial {
     }
 }
 
+// MARK: - touches logic
 extension RotationDial {
     public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let p = convert(point, to: self)
-        
         if bounds.contains(p) {
             return self
         }
@@ -232,53 +252,27 @@ extension RotationDial {
         return nil
     }
     
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        guard touches.count == 1, let touch = touches.first else {
+    private func handle(_ touches: Set<UITouch>) {
+        guard touches.count == 1,
+            let touch = touches.first else {
             return
         }
         
-        let point = touch.location(in: self)
-        rotationCal = RotationCalculator(midPoint: getRotationCenter())
-        currentPoint = point
-        previousPoint = point
+        viewModel.touchPoint = touch.location(in: self)
+    }
+    
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        handle(touches)
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        
-        guard touches.count == 1, let touch = touches.first else {
-            return
-        }
-        
-        let point = touch.location(in: self)
-        
-        currentPoint = point
-        if let radians = rotationCal?.getRotationRadians(byOldPoint: previousPoint!, andNewPoint: currentPoint!) {
-            
-            if case .limit = config.rotationLimitType {
-                guard radians <= radiansLimit else {
-                    return
-                }
-            }
-            
-            guard rotateDialPlate(byRadians: radians) == true else {
-                didRotate(getRotationDegrees())
-                return
-            }
-        }
-        
-        previousPoint = currentPoint
-        
-        didRotate(getRotationDegrees())
+        handle(touches)
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
-        currentPoint = nil
-        previousPoint = nil
-        rotationCal = nil
+        viewModel.touchPoint = nil
     }
 }

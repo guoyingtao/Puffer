@@ -17,6 +17,8 @@
 		5F3BE1FB219CBD63005C4BD8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BE1FA219CBD63005C4BD8 /* README.md */; };
 		5F3BE1FD219CBFF1005C4BD8 /* Puffer.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BE1FC219CBFF1005C4BD8 /* Puffer.podspec */; };
 		5F3BE1FF219CCFC5005C4BD8 /* RotationDialPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BE1FE219CCFC5005C4BD8 /* RotationDialPlate.swift */; };
+		5FC56328229641C80094652C /* CGAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC56327229641C80094652C /* CGAngle.swift */; };
+		5FC5632A229642F60094652C /* RotationDialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC56329229642F60094652C /* RotationDialViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +43,10 @@
 		5F3BE1BC219A49A8005C4BD8 /* Puffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puffer.swift; sourceTree = "<group>"; };
 		5F3BE1ED219A70DD005C4BD8 /* RotationCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationCalculator.swift; sourceTree = "<group>"; };
 		5F3BE1FA219CBD63005C4BD8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		5F3BE1FC219CBFF1005C4BD8 /* Puffer.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Puffer.podspec; sourceTree = "<group>"; };
+		5F3BE1FC219CBFF1005C4BD8 /* Puffer.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Puffer.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5F3BE1FE219CCFC5005C4BD8 /* RotationDialPlate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationDialPlate.swift; sourceTree = "<group>"; };
+		5FC56327229641C80094652C /* CGAngle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGAngle.swift; sourceTree = "<group>"; };
+		5FC56329229642F60094652C /* RotationDialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationDialViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,11 +93,13 @@
 			children = (
 				5F3BE1BA219A4996005C4BD8 /* CoreGraphicsExtensions.swift */,
 				5F3BE1B6219A493E005C4BD8 /* RotationDial.swift */,
+				5FC56329229642F60094652C /* RotationDialViewModel.swift */,
 				5F3BE1FE219CCFC5005C4BD8 /* RotationDialPlate.swift */,
 				5F3BE1ED219A70DD005C4BD8 /* RotationCalculator.swift */,
 				5F3BE1BC219A49A8005C4BD8 /* Puffer.swift */,
 				5F3BE19F219A48CA005C4BD8 /* Puffer.h */,
 				5F3BE1A0219A48CA005C4BD8 /* Info.plist */,
+				5FC56327229641C80094652C /* CGAngle.swift */,
 			);
 			path = Puffer;
 			sourceTree = "<group>";
@@ -221,7 +227,9 @@
 				5F3BE1B8219A493E005C4BD8 /* RotationDial.swift in Sources */,
 				5F3BE1BB219A4996005C4BD8 /* CoreGraphicsExtensions.swift in Sources */,
 				5F3BE1FF219CCFC5005C4BD8 /* RotationDialPlate.swift in Sources */,
+				5FC56328229641C80094652C /* CGAngle.swift in Sources */,
 				5F3BE1BD219A49A8005C4BD8 /* Puffer.swift in Sources */,
+				5FC5632A229642F60094652C /* RotationDialViewModel.swift in Sources */,
 				5F3BE1EE219A70DD005C4BD8 /* RotationCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

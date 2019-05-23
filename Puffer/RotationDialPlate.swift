@@ -1,6 +1,6 @@
 //
 //  RotationDailPlate.swift
-//  Mantis
+//  Puffer
 //
 //  Created by Echo on 10/24/18.
 //  Copyright © 2018 Echo. All rights reserved.
@@ -53,9 +53,9 @@ class RotationDialPlate: UIView {
         return r
     }()
     
-    var config = Puffer.Config()
+    var config = Config()
     
-    init(frame: CGRect, config: Puffer.Config = Puffer.Config()) {
+    init(frame: CGRect, config: Config = Config()) {
         super.init(frame: frame)
         self.config = config
         setup()

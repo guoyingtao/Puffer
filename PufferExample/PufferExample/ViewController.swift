@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Puffer
+//import Puffer
 
 class ViewController: UIViewController {
 
@@ -15,14 +15,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var roateAngleValue: UILabel!
     @IBOutlet weak var customRotationView: UIView!
     
-    var orientation: Puffer.Orientation = .normal
+    var orientation: Orientation = .normal
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customRotationView.isHidden = true
         
-        let config = Puffer.Config()
+        let config = Config()
         dial.setup(config: config)
         
         dial.didRotate = {[weak self] angle in
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     @IBAction func color(_ sender: Any) {
         resetStatus()
         
-        var config = Puffer.Config()
+        var config = Config()
         config.numberShowSpan = 2
         config.centerAxisColor = .yellow
         config.bigScaleColor = .blue
@@ -59,15 +59,15 @@ class ViewController: UIViewController {
     @IBAction func reset(_ sender: Any) {
         resetStatus()
         
-        let config = Puffer.Config()
+        let config = Config()
         dial.setup(config: config)
     }
     
     @IBAction func rotateLimit(_ sender: Any) {
         resetStatus()
         
-        var config = Puffer.Config()
-        config.rotationLimitType = .limit(degree: 45)
+        var config = Config()
+        config.rotationLimitType = .limit(angle: CGAngle(degrees: 45))
 
         dial.setup(config: config)
     }
@@ -75,8 +75,8 @@ class ViewController: UIViewController {
     @IBAction func showLimit(_ sender: Any) {
         resetStatus()
         
-        var config = Puffer.Config()
-        config.degreeShowLimitType = .limit(degree: 60)
+        var config = Config()
+        config.angleShowLimitType = .limit(angle: CGAngle(degrees: 60))
         
         dial.setup(config: config)
     }
@@ -84,8 +84,8 @@ class ViewController: UIViewController {
     @IBAction func changeOrientation(_ sender: Any) {
         resetStatus()
         
-        var config = Puffer.Config()
-        config.degreeShowLimitType = .limit(degree: 60)
+        var config = Config()
+        config.angleShowLimitType = .limit(angle: CGAngle(degrees: 60))
         
         if orientation == .normal {
             config.orientation = .left
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
         
         dial.setRotationCenter(byCenterPoint: customRotationView.center, inView: self.view)
         
-        let config = Puffer.Config()
+        let config = Config()
         dial.setup(config: config)
     }
 }
