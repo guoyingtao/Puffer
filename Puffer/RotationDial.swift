@@ -59,12 +59,11 @@ extension RotationDial {
         backgroundColor = config.backgroundColor
         
         dialPlateHolder?.removeFromSuperview()
-        dialPlateHolder = getDialPlateHolder(byOrientation: config.orientation)
+        dialPlateHolder = getDialPlateHolder(by: config.orientation)
         addSubview(dialPlateHolder!)
-        createDialPlate(byContainer: dialPlateHolder!)
-        setupPointer(byContainer: dialPlateHolder!)
-        
-        setDialPlateHolder(byOrientation: config.orientation)
+        createDialPlate(in: dialPlateHolder!)
+        setupPointer(in: dialPlateHolder!)        
+        setDialPlateHolder(by: config.orientation)
     }
     
     private func setupViewModel() {
@@ -72,14 +71,14 @@ extension RotationDial {
                                         options: [.old, .new]
         ) { [weak self] _, changed in
             guard let angle = changed.newValue else { return }
-            self?.handleRotation(angle: angle)
+            self?.handleRotation(by: angle)
         }
         
         let rotationCenter = getRotationCenter()
         viewModel.makeRotationCalculator(by: rotationCenter)
     }
     
-    private func handleRotation(angle: CGAngle) {
+    private func handleRotation(by angle: CGAngle) {
         if case .limit = config.rotationLimitType {
             guard angle <= angleLimit else {
                 return
@@ -91,7 +90,7 @@ extension RotationDial {
         }
     }
     
-    private func getDialPlateHolder(byOrientation orientation: Orientation) -> UIView {
+    private func getDialPlateHolder(by orientation: Orientation) -> UIView {
         let view = UIView(frame: bounds)
         
         switch orientation {
@@ -104,7 +103,7 @@ extension RotationDial {
         return view
     }
     
-    private func setDialPlateHolder(byOrientation orientation: Orientation) {
+    private func setDialPlateHolder(by orientation: Orientation) {
         switch orientation {
         case .normal:
             ()
@@ -120,7 +119,7 @@ extension RotationDial {
         }
     }
     
-    private func createDialPlate(byContainer container: UIView) {
+    private func createDialPlate(in container: UIView) {
         var margin: CGFloat = CGFloat(config.margin)
         if case .limit(let angle) = config.angleShowLimitType {
             margin = 0
@@ -145,7 +144,7 @@ extension RotationDial {
         container.addSubview(dialPlate!)
     }
     
-    private func setupPointer(byContainer container: UIView){
+    private func setupPointer(in container: UIView){
         guard let dialPlate = dialPlate else { return }
         
         let path = CGMutablePath()
