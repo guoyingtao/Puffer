@@ -29,16 +29,16 @@ private let spanBetweenDialPlateAndPointer: CGFloat = 6
 
 public class RotationDial: UIView {
     
-    public var didRotate: (CGFloat) -> Void = { _ in }
+    public var didRotate: (_ angle: CGAngle) -> Void = { _ in }
     public var config = Config()
     
-    private var radiansLimit: CGFloat = CGFloat.pi
+    private var angleLimit = CGAngle(radians: CGFloat.pi)
     private var showRadiansLimit: CGFloat = CGFloat.pi
     private var dialPlate: RotationDialPlate?
     private var dialPlateHolder: UIView?
     private var pointer: CAShapeLayer = CAShapeLayer()
     
-    private var viewModel = RotationDialViewModel()
+    var viewModel = RotationDialViewModel()
     private var rotationKVO: NSKeyValueObservation?
     private var pointKVO: NSKeyValueObservation?
     
@@ -81,13 +81,13 @@ extension RotationDial {
     
     private func handleRotation(angle: CGAngle) {
         if case .limit = config.rotationLimitType {
-            guard angle.radians <= radiansLimit else {
+            guard angle <= angleLimit else {
                 return
             }
         }
         
-        if rotateDialPlate(byRadians: angle.radians) {
-            didRotate(getRotationAngle().degrees)
+        if rotateDialPlate(by: angle) {
+            didRotate(getRotationAngle())
         }
     }
     
@@ -149,7 +149,6 @@ extension RotationDial {
         guard let dialPlate = dialPlate else { return }
         
         let path = CGMutablePath()
-        
         let pointerEdgeLength: CGFloat = pointerHeight * sqrt(2)
         
         let pointTop = CGPoint(x: container.bounds.width/2, y: dialPlate.frame.maxY + pointerHeight)
@@ -175,7 +174,6 @@ extension RotationDial {
             return dialPlate.convert(p, to: self)
         }
     }
-
 }
 
 // MARK: - public API
@@ -187,7 +185,7 @@ extension RotationDial {
         self.config = config
         
         if case .limit(let angle) = config.rotationLimitType {
-            radiansLimit = angle.radians
+            angleLimit = angle
         }
         
         setupUI()
@@ -195,16 +193,17 @@ extension RotationDial {
     }
     
     @discardableResult
-    func rotateDialPlate(byRadians radians: CGFloat) -> Bool {
+    func rotateDialPlate(by angle: CGAngle) -> Bool {
         guard let dialPlate = dialPlate else { return false }
         
+        let radians = angle.radians
         if case .limit = config.rotationLimitType {
-            if (getRotationAngle().radians * radians) > 0 && abs(getRotationAngle().radians + radians) >= radiansLimit {
+            if (getRotationAngle() * angle).radians > 0 && abs(getRotationAngle().radians + radians) >= angleLimit.radians {
                 
                 if radians > 0 {
-                    rotateDialPlate(toRadians: radiansLimit)
+                    rotateDialPlate(to: angleLimit)
                 } else {
-                    rotateDialPlate(toRadians: -radiansLimit)
+                    rotateDialPlate(to: -angleLimit)
                 }
                 
                 return false
@@ -215,9 +214,11 @@ extension RotationDial {
         return true
     }
     
-    public func rotateDialPlate(toRadians radians: CGFloat, animated: Bool = false) {
+    public func rotateDialPlate(to angle: CGAngle, animated: Bool = false) {
+        let radians = angle.radians
+        
         if case .limit = config.rotationLimitType {
-            guard abs(radians) <= radiansLimit else {
+            guard abs(radians) <= angleLimit.radians else {
                 return
             }
         }
@@ -236,7 +237,7 @@ extension RotationDial {
     }
     
     public func resetAngle(animated: Bool) {
-        rotateDialPlate(toRadians: 0, animated: animated)
+        rotateDialPlate(to: CGAngle(radians: 0), animated: animated)
     }
     
     public func getRotationAngle() -> CGAngle {
@@ -245,45 +246,9 @@ extension RotationDial {
         let radians = CGFloat(atan2f(Float(dialPlate.transform.b), Float(dialPlate.transform.a)))
         return CGAngle(radians: radians)
     }
-        
+    
     public func setRotationCenter(by center: CGPoint, in view: UIView) {
         let p = view.convert(center, to: self)
         config.rotationCenterType = .custom(p)
-    }
-}
-
-// MARK: - touches logic
-extension RotationDial {
-    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let p = convert(point, to: self)
-        if bounds.contains(p) {
-            return self
-        }
-        
-        return nil
-    }
-    
-    private func handle(_ touches: Set<UITouch>) {
-        guard touches.count == 1,
-            let touch = touches.first else {
-            return
-        }
-        
-        viewModel.touchPoint = touch.location(in: self)
-    }
-    
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        handle(touches)
-    }
-    
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        handle(touches)
-    }
-    
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        viewModel.touchPoint = nil
     }
 }

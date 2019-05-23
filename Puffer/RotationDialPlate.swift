@@ -94,7 +94,7 @@ class RotationDialPlate: UIView {
         numberPlateLayer.frame = self.bounds
         self.layer.addSublayer(numberPlateLayer)
         
-        let origin = numberPlateLayer.center
+        let origin = CGPoint(x: numberPlateLayer.frame.midX, y: numberPlateLayer.frame.midY)
         let startPos = CGPoint(x: numberPlateLayer.bounds.midX, y: numberPlateLayer.bounds.maxY - margin - spaceBetweenScaleAndNumber)
         let step = (2 * CGFloat.pi) / CGFloat(bigDegreeScaleNumber)
         for i in (0 ..< bigDegreeScaleNumber){
@@ -159,15 +159,4 @@ class RotationDialPlate: UIView {
         setCenterPart()
     }
 
-}
-
-extension CALayer{
-    var size: CGSize {
-        get{ return self.bounds.size.checked }
-        set{ return self.bounds.size = newValue }
-    }
-
-    var center: CGPoint {
-        get{ return self.bounds.center.checked }
-    }
 }

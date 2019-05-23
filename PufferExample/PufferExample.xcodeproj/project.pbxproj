@@ -21,6 +21,7 @@
 		5FC5633D2296E90C0094652C /* CGAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC563342296E90C0094652C /* CGAngle.swift */; };
 		5FC5633E2296E90C0094652C /* Puffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC563352296E90C0094652C /* Puffer.swift */; };
 		5FC5633F2296E90C0094652C /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC563362296E90C0094652C /* CoreGraphicsExtensions.swift */; };
+		5FC563422296F7D00094652C /* RotationDial+Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC563412296F7D00094652C /* RotationDial+Touches.swift */; };
 		91F4572B064718ED03856F36 /* Pods_PufferExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF3CFC1041440C167E182C7 /* Pods_PufferExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		5FC563342296E90C0094652C /* CGAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGAngle.swift; sourceTree = "<group>"; };
 		5FC563352296E90C0094652C /* Puffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Puffer.swift; sourceTree = "<group>"; };
 		5FC563362296E90C0094652C /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
+		5FC563412296F7D00094652C /* RotationDial+Touches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RotationDial+Touches.swift"; sourceTree = "<group>"; };
 		75D0576A280076B18CC19A7E /* Pods-PufferExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PufferExample.release.xcconfig"; path = "Target Support Files/Pods-PufferExample/Pods-PufferExample.release.xcconfig"; sourceTree = "<group>"; };
 		773F28649E274187013378ED /* Pods_PufferExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PufferExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF3CFC1041440C167E182C7 /* Pods_PufferExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PufferExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,13 +139,14 @@
 		5FC5632F2296E90C0094652C /* Puffer */ = {
 			isa = PBXGroup;
 			children = (
-				5FC563302296E90C0094652C /* RotationDialViewModel.swift */,
 				5FC563312296E90C0094652C /* RotationCalculator.swift */,
 				5FC563322296E90C0094652C /* RotationDialPlate.swift */,
 				5FC563332296E90C0094652C /* RotationDial.swift */,
+				5FC563302296E90C0094652C /* RotationDialViewModel.swift */,
+				5FC563412296F7D00094652C /* RotationDial+Touches.swift */,
 				5FC563342296E90C0094652C /* CGAngle.swift */,
-				5FC563352296E90C0094652C /* Puffer.swift */,
 				5FC563362296E90C0094652C /* CoreGraphicsExtensions.swift */,
+				5FC563352296E90C0094652C /* Puffer.swift */,
 			);
 			name = Puffer;
 			path = ../../Puffer;
@@ -315,6 +318,7 @@
 				5FC5633D2296E90C0094652C /* CGAngle.swift in Sources */,
 				5FC5633A2296E90C0094652C /* RotationCalculator.swift in Sources */,
 				5FC563392296E90C0094652C /* RotationDialViewModel.swift in Sources */,
+				5FC563422296F7D00094652C /* RotationDial+Touches.swift in Sources */,
 				5F3BE1CB219A4AB7005C4BD8 /* AppDelegate.swift in Sources */,
 				5FC5633C2296E90C0094652C /* RotationDial.swift in Sources */,
 				5FC5633E2296E90C0094652C /* Puffer.swift in Sources */,

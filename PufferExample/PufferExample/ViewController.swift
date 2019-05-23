@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         dial.didRotate = {[weak self] angle in
             guard let self = self else { return }
             
-            self.roateAngleValue.text = String(format:"%0.02f°", angle)
+            self.roateAngleValue.text = String(format:"%0.02f°", angle.degrees)
             
             if self.customRotationView.isHidden == false {
                 self.customRotationView.transform = CGAffineTransform(rotationAngle: self.dial.getRotationAngle().radians)

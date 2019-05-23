@@ -25,37 +25,6 @@
 import Foundation
 import UIKit
 
-extension UIColor {
-    var greyscale: UIColor{
-        var (hue, saturation, brightness, alpha) = (CGFloat(0.0), CGFloat(0.0), CGFloat(0.0), CGFloat(0.0))
-
-        if self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
-            return  UIColor(hue: hue, saturation: 0, brightness: brightness, alpha: alpha / 2)
-        }else {
-            return UIColor.gray
-        }
-    }
-    func modified(withAdditionalHue hue: CGFloat, additionalSaturation: CGFloat, additionalBrightness: CGFloat) -> UIColor {
-        
-        var currentHue: CGFloat = 0.0
-        var currentSaturation: CGFloat = 0.0
-        var currentBrigthness: CGFloat = 0.0
-        var currentAlpha: CGFloat = 0.0
-        
-        if self.getHue(&currentHue, saturation: &currentSaturation, brightness: &currentBrigthness, alpha: &currentAlpha){
-            return UIColor(hue: currentHue + hue,
-                           saturation: currentSaturation + additionalSaturation,
-                           brightness: currentBrigthness + additionalBrightness,
-                           alpha: currentAlpha)
-        } else {
-            return self
-        }
-    }
-}
-
-extension Angle{
-    var reverse:Angle{return 2 * CGFloat.pi - self}
-}
 extension FloatingPoint{
     var isBad:Bool{ return isNaN || isInfinite }
     var checked:Self{

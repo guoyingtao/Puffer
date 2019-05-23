@@ -8,16 +8,13 @@
 
 import UIKit
 
-public class CGAngle: NSObject {
+/// Use this class to make angle calculation to be simpler
+public class CGAngle: NSObject, Comparable {
+    public static func < (lhs: CGAngle, rhs: CGAngle) -> Bool {
+        return lhs.radians < rhs.radians
+    }
+    
     public var radians: CGFloat = 0.0
-    
-    @inlinable init(radians: CGFloat) {
-        self.radians = radians
-    }
-    
-    @inlinable init(degrees: CGFloat) {
-        radians = degrees / 180.0 * CGFloat.pi
-    }
     
     @inlinable var degrees: CGFloat {
         get {
@@ -28,9 +25,43 @@ public class CGAngle: NSObject {
         }
     }
 
+    @inlinable init(radians: CGFloat) {
+        self.radians = radians
+    }
+    
+    @inlinable init(degrees: CGFloat) {
+        radians = degrees / 180.0 * CGFloat.pi
+    }
+    
     override public var description: String {
         return String(format: "%0.2f°", degrees)
     }
+    
+    static public func +(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
+        return CGAngle(radians: lhs.radians + rhs.radians)
+    }
+    
+    static public func *(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
+        return CGAngle(radians: lhs.radians * rhs.radians)
+    }
+    
+    static public func -(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
+        return CGAngle(radians: lhs.radians - rhs.radians)
+    }
+    
+    static public prefix func -(rhs: CGAngle) -> CGAngle {
+        return CGAngle(radians: -rhs.radians)
+    }
+
+    static public func /(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
+        guard rhs.radians != 0 else {
+            if lhs.radians == 0 { return CGAngle(radians: 0)}
+            if lhs.radians > 0 { return CGAngle(radians: CGFloat.infinity)}
+            return CGAngle(radians: -CGFloat.infinity)
+        }
+        return CGAngle(radians: lhs.radians / rhs.radians)
+    }
+
 }
 
 
