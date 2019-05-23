@@ -21,9 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         customRotationView.isHidden = true
-        
-        let config = Config()
-        dial.setup(config: config)
+        dial.setup()
         
         dial.didRotate = {[weak self] angle in
             guard let self = self else { return }
@@ -31,7 +29,7 @@ class ViewController: UIViewController {
             self.roateAngleValue.text = String(format:"%0.02f°", angle)
             
             if self.customRotationView.isHidden == false {
-                self.customRotationView.transform = CGAffineTransform(rotationAngle: self.dial.getRotationRadians())
+                self.customRotationView.transform = CGAffineTransform(rotationAngle: self.dial.getRotationAngle().radians)
             }
         }
     }
@@ -53,14 +51,12 @@ class ViewController: UIViewController {
         config.numberColor = .purple
         config.backgroundColor = .lightGray
         
-        dial.setup(config: config)
+        dial.setup(with: config)
     }
     
     @IBAction func reset(_ sender: Any) {
         resetStatus()
-        
-        let config = Config()
-        dial.setup(config: config)
+        dial.setup()
     }
     
     @IBAction func rotateLimit(_ sender: Any) {
@@ -69,7 +65,7 @@ class ViewController: UIViewController {
         var config = Config()
         config.rotationLimitType = .limit(angle: CGAngle(degrees: 45))
 
-        dial.setup(config: config)
+        dial.setup(with: config)
     }
     
     @IBAction func showLimit(_ sender: Any) {
@@ -78,7 +74,7 @@ class ViewController: UIViewController {
         var config = Config()
         config.angleShowLimitType = .limit(angle: CGAngle(degrees: 60))
         
-        dial.setup(config: config)
+        dial.setup(with: config)
     }
     
     @IBAction func changeOrientation(_ sender: Any) {
@@ -98,7 +94,7 @@ class ViewController: UIViewController {
         }
         
         orientation = config.orientation
-        dial.setup(config: config)
+        dial.setup(with: config)
     }
     
     
@@ -107,10 +103,9 @@ class ViewController: UIViewController {
         customRotationView.transform = .identity
         customRotationView.isHidden = false
         
-        dial.setRotationCenter(byCenterPoint: customRotationView.center, inView: self.view)
+        dial.setRotationCenter(by: customRotationView.center, in: self.view)
         
-        let config = Config()
-        dial.setup(config: config)
+        dial.setup()
     }
 }
 
