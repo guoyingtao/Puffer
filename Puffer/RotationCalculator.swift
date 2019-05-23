@@ -9,23 +9,6 @@
 //
 import UIKit
 
-let π = CGFloat.pi
-
-extension CGFloat {
-    var degrees: CGFloat {
-        return self * 180 / π;
-    }
-    var radians: CGFloat {
-        return self * π / 180;
-    }
-    var rad2deg: CGFloat {
-        return self.degrees
-    }
-    var deg2rad: CGFloat {
-        return self.radians
-    }
-}
-
 class RotationCalculator {
     
     // midpoint for gesture recognizer
@@ -46,10 +29,10 @@ class RotationCalculator {
         
         var rotation = angleBetween(pointA: currentPoint, andPointB: previousPoint)
         
-        if (rotation > π) {
-            rotation -= π*2
-        } else if (rotation < -π) {
-            rotation += π*2
+        if (rotation > CGFloat.pi) {
+            rotation -= CGFloat.pi * 2
+        } else if (rotation < -CGFloat.pi) {
+            rotation += CGFloat.pi * 2
         }
         
         return rotation
@@ -87,10 +70,10 @@ class RotationCalculator {
     }
     
     private func angleForPoint(point: CGPoint) -> CGFloat {
-        var angle = CGFloat(-atan2f(Float(point.x - midPoint.x), Float(point.y - midPoint.y))) + π/2
+        var angle = CGFloat(-atan2f(Float(point.x - midPoint.x), Float(point.y - midPoint.y))) + CGFloat.pi / 2
         
         if (angle < 0) {
-            angle += π*2
+            angle += CGFloat.pi * 2
         }
         
         return angle
