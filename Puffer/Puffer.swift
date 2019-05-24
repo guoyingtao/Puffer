@@ -12,33 +12,6 @@ public func createDial(config: Config = Config()) -> RotationDial {
     return RotationDial(frame: CGRect.zero, config: config)
 }
 
-public enum RotationCenterType {
-    case useDefault
-    case custom(CGPoint)
-}
-
-public enum RotationLimitType {
-    case noLimit
-    case limit(angle: CGAngle)
-}
-
-public enum AnglehowLimitType {
-    case noLimit
-    case limit(angle: CGAngle)
-}
-
-public enum Orientation {
-    case normal
-    case right
-    case left
-    case upsideDown
-}
-
-public enum Theme {
-    case dark
-    case light
-}
-
 public struct Config {
     public init() {}
     
@@ -76,5 +49,34 @@ public struct Config {
                 centerAxisColor = .darkGray
             }
         }
+    }
+}
+
+public extension Config {
+    enum RotationCenterType {
+        case useDefault
+        case custom(CGPoint)
+    }
+    
+    enum RotationLimitType {
+        case noLimit
+        case limit(angle: CGAngle)
+    }
+    
+    enum AnglehowLimitType {
+        case noLimit
+        case limit(angle: CGAngle)
+    }
+    
+    enum Orientation {
+        case normal
+        case right
+        case left
+        case upsideDown
+    }
+    
+    enum Theme {
+        case dark
+        case light
     }
 }

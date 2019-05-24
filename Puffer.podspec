@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "Puffer"
-  s.version      = "0.13"
+  s.version      = "1.0"
   s.summary      = "A swift rotation dial"
 
   s.description  = <<-DESC

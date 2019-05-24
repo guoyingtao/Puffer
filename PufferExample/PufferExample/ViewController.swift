@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import Puffer
+import Puffer
 
 class ViewController: UIViewController {
 
@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var roateAngleValue: UILabel!
     @IBOutlet weak var customRotationView: UIView!
     
-    var orientation: Orientation = .normal
+    var orientation: Config.Orientation = .normal
     
     override func viewDidLoad() {
         super.viewDidLoad()

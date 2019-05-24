@@ -6,7 +6,7 @@ target 'PufferExample' do
   use_frameworks!
 
   # Pods for PufferExample
-  # pod 'Puffer', :path => '../'
+  pod 'Puffer', :path => '../'
 
   target 'PufferExampleTests' do
     inherit! :search_paths

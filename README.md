@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/swift-4.2-orange.svg" alt="swift 4.2 badge" />
+    <img src="https://img.shields.io/badge/swift-5.0-orange.svg" alt="swift 5.0 badge" />
     <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg" alt="platform iOS badge" />
     <img src="https://img.shields.io/badge/license-MIT-black.svg" alt="license MIT badge" />   
 </p>
@@ -39,7 +39,7 @@ You can use this tool to mimic a rotation dial just like what Photo.app does
 ### CocoaPods
 
 ```ruby
-pod 'Puffer', '~> 0.12'
+pod 'Puffer', '~> 1.0'
 ```
 You may also need the code below in your pod file if compile errors happen because of different swift version.
 
@@ -48,7 +48,7 @@ post_install do |installer|
     installer.pods_project.targets.each do |target|
       if ['Mantis'].include? target.name
         target.build_configurations.each do |config|
-          config.build_settings['SWIFT_VERSION'] = '4.2'
+          config.build_settings['SWIFT_VERSION'] = '5.0'
         end
       end
     end

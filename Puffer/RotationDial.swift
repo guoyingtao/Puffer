@@ -102,7 +102,7 @@ extension RotationDial {
         }
     }
     
-    private func getDialPlateHolder(by orientation: Orientation) -> UIView {
+    private func getDialPlateHolder(by orientation: Config.Orientation) -> UIView {
         let view = UIView(frame: bounds)
         
         switch orientation {
@@ -115,7 +115,7 @@ extension RotationDial {
         return view
     }
     
-    private func setDialPlateHolder(by orientation: Orientation) {
+    private func setDialPlateHolder(by orientation: Config.Orientation) {
         switch orientation {
         case .normal:
             ()
