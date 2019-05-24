@@ -158,5 +158,4 @@ class RotationDialPlate: UIView {
         setupAngleNumber()
         setCenterPart()
     }
-
 }

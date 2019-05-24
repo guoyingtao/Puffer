@@ -43,6 +43,10 @@ public class RotationDial: UIView {
 
     var viewModel = RotationDialViewModel()
     
+    /**
+     This one is needed to solve storyboard render problem
+     https://stackoverflow.com/a/42678873/288724
+     */
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.config = Config()
@@ -50,6 +54,7 @@ public class RotationDial: UIView {
     }
     
     public init(frame: CGRect, config: Config) {
+        self.config = config
         super.init(frame: frame)
         setup()
     }
