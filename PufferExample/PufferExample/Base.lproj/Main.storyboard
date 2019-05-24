@@ -56,12 +56,22 @@
                                     <constraint firstItem="Dvr-Q3-aF2" firstAttribute="centerY" secondItem="JN1-yQ-Wvo" secondAttribute="centerY" id="lx4-cW-ElX"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6EG-1u-KPd">
+                                <rect key="frame" x="90" y="569" width="195" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Custom Rotation Center"/>
+                                <connections>
+                                    <action selector="testCenter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="myN-d8-6xC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JN1-yQ-Wvo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="26f-M4-kPM"/>
                             <constraint firstItem="fir-vD-AdP" firstAttribute="top" secondItem="gsK-M6-tUI" secondAttribute="bottom" constant="20" id="Dah-PA-lKf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6EG-1u-KPd" secondAttribute="bottom" constant="20" id="Mpy-2v-AOT"/>
                             <constraint firstItem="gsK-M6-tUI" firstAttribute="top" secondItem="JN1-yQ-Wvo" secondAttribute="top" constant="-20" id="N2a-6p-7cD"/>
+                            <constraint firstItem="6EG-1u-KPd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="QRl-ct-lfj"/>
                             <constraint firstItem="fir-vD-AdP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SAq-0M-ClY"/>
                             <constraint firstItem="gsK-M6-tUI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WjM-9d-b2f"/>
                             <constraint firstItem="gsK-M6-tUI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="toE-ay-aFI"/>
@@ -69,29 +79,26 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Color" id="VAC-Uf-87L">
+                        <barButtonItem title="Change Color" id="VAC-Uf-87L">
                             <connections>
                                 <action selector="color:" destination="BYZ-38-t0r" id="A9j-hM-4ZC"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Limit 45°" id="Yyc-To-zAj">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="SEp-nM-fZf"/>
+                        <barButtonItem title="Rotation Limit" id="Yyc-To-zAj">
                             <connections>
                                 <action selector="rotateLimit:" destination="BYZ-38-t0r" id="mPh-tN-BSB"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="tJl-qh-t0b"/>
                         <barButtonItem title="Partial show" id="Yaj-GW-fyV">
                             <connections>
                                 <action selector="showLimit:" destination="BYZ-38-t0r" id="uxX-4p-b7W"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="CustomCenter" id="2OG-fc-Y7Z">
-                            <connections>
-                                <action selector="testCenter:" destination="BYZ-38-t0r" id="p0h-ax-ZrT"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="Voy-qM-EdV">
-                        <barButtonItem key="leftBarButtonItem" title="Changing orientation with partial show" id="btw-Nu-v8c">
+                        <barButtonItem key="leftBarButtonItem" title="Change orientations for partial show" id="btw-Nu-v8c">
                             <connections>
                                 <action selector="changeOrientation:" destination="BYZ-38-t0r" id="QjE-qI-rkX"/>
                             </connections>
