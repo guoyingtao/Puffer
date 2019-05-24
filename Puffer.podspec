@@ -6,11 +6,11 @@
 #  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
 #
 
-`echo "4.2" > .swift-version`
+`echo "5.0" > .swift-version`
 
 Pod::Spec.new do |s|
   s.name         = "Puffer"
-  s.version      = "1.0"
+  s.version      = "1.0.2"
   s.summary      = "A swift rotation dial"
 
   s.description  = <<-DESC

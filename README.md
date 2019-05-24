@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="Images/puffer.png" height="120" max-width="90%" alt="Mantis" />
+    <img src="Images/puffer.png" height="120" max-width="90%" alt="Puffer" />
 </p>
 
 <p align="center">
@@ -39,7 +39,7 @@ You can use this tool to mimic a rotation dial just like what Photo.app does
 ### CocoaPods
 
 ```ruby
-pod 'Puffer', '~> 1.0'
+pod 'Puffer', '~> 1.0.2'
 ```
 You may also need the code below in your pod file if compile errors happen because of different swift version.
 

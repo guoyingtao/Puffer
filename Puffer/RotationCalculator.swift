@@ -13,13 +13,7 @@ class RotationCalculator {
     
     // midpoint for gesture recognizer
     var midPoint = CGPoint.zero
-    
-    // minimal distance from midpoint
-    var innerRadius: CGFloat?
-    
-    // maximal distance to midpoint
-    var outerRadius: CGFloat?
-    
+        
     // relative rotation for current gesture (in radians)
     var rotation: CGFloat? {
         guard let currentPoint = self.currentPoint,

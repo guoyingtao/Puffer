@@ -39,7 +39,6 @@ public class RotationDial: UIView {
     private var dialPlateHolder: UIView?
     private var pointer: CAShapeLayer = CAShapeLayer()
     private var rotationKVO: NSKeyValueObservation?
-    private var pointKVO: NSKeyValueObservation?
 
     var viewModel = RotationDialViewModel()
     
@@ -49,14 +48,12 @@ public class RotationDial: UIView {
      */
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.config = Config()
         setup()
     }
     
     public init(frame: CGRect, config: Config) {
-        self.config = config
         super.init(frame: frame)
-        setup()
+        setup(with: config)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -258,8 +255,8 @@ extension RotationDial {
         return CGAngle(radians: radians)
     }
     
-    public func setRotationCenter(by center: CGPoint, in view: UIView) {
-        let p = view.convert(center, to: self)
+    public func setRotationCenter(by point: CGPoint, of view: UIView) {
+        let p = view.convert(point, to: self)
         config.rotationCenterType = .custom(p)
     }
 }

@@ -1,5 +1,5 @@
 PODS:
-  - Puffer (0.13)
+  - Puffer (1.0.2)
 
 DEPENDENCIES:
   - Puffer (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Puffer: 4fa4b3e99a025422a3c522a3441022581a2d8fc5
+  Puffer: a5674add0c7da99e1c092d6678b3dab6ae0089d8
 
 PODFILE CHECKSUM: bb6d0ff590523288e3b3bdb0adba620455bb138f
 

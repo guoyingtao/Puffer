@@ -103,7 +103,7 @@ class ViewController: UIViewController {
         customRotationView.transform = .identity
         customRotationView.isHidden = false
         
-        dial.setRotationCenter(by: customRotationView.center, in: self.view)
+        dial.setRotationCenter(by: customRotationView.center, of: self.view)
         
         dial.setup()
     }

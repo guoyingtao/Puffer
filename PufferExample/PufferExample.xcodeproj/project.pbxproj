@@ -10,10 +10,10 @@
 		4A91B6089CB01B45BDB9CCCD /* Pods_PufferExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 773F28649E274187013378ED /* Pods_PufferExampleTests.framework */; };
 		5F3BE1CB219A4AB7005C4BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BE1CA219A4AB7005C4BD8 /* AppDelegate.swift */; };
 		5F3BE1CD219A4AB7005C4BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BE1CC219A4AB7005C4BD8 /* ViewController.swift */; };
-		5F3BE1D0219A4AB7005C4BD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BE1CE219A4AB7005C4BD8 /* Main.storyboard */; };
 		5F3BE1D2219A4AB8005C4BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BE1D1219A4AB8005C4BD8 /* Assets.xcassets */; };
-		5F3BE1D5219A4AB8005C4BD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BE1D3219A4AB8005C4BD8 /* LaunchScreen.storyboard */; };
 		5F3BE1E0219A4AB8005C4BD8 /* PufferExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BE1DF219A4AB8005C4BD8 /* PufferExampleTests.swift */; };
+		5FC56356229871620094652C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FC56354229871620094652C /* Main.storyboard */; };
+		5FC56357229871620094652C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FC56355229871620094652C /* LaunchScreen.storyboard */; };
 		91F4572B064718ED03856F36 /* Pods_PufferExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF3CFC1041440C167E182C7 /* Pods_PufferExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,14 +32,14 @@
 		5F3BE1C7219A4AB7005C4BD8 /* PufferExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PufferExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3BE1CA219A4AB7005C4BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F3BE1CC219A4AB7005C4BD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5F3BE1CF219A4AB7005C4BD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5F3BE1D1219A4AB8005C4BD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5F3BE1D4219A4AB8005C4BD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F3BE1D6219A4AB8005C4BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F3BE1DB219A4AB8005C4BD8 /* PufferExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PufferExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3BE1DF219A4AB8005C4BD8 /* PufferExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PufferExampleTests.swift; sourceTree = "<group>"; };
 		5F3BE1E1219A4AB8005C4BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F3BE1F8219BAB27005C4BD8 /* Puffer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Puffer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FC56354229871620094652C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5FC56355229871620094652C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75D0576A280076B18CC19A7E /* Pods-PufferExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PufferExample.release.xcconfig"; path = "Target Support Files/Pods-PufferExample/Pods-PufferExample.release.xcconfig"; sourceTree = "<group>"; };
 		773F28649E274187013378ED /* Pods_PufferExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PufferExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF3CFC1041440C167E182C7 /* Pods_PufferExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PufferExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,11 +90,11 @@
 		5F3BE1C9219A4AB7005C4BD8 /* PufferExample */ = {
 			isa = PBXGroup;
 			children = (
+				5FC56355229871620094652C /* LaunchScreen.storyboard */,
+				5FC56354229871620094652C /* Main.storyboard */,
 				5F3BE1CA219A4AB7005C4BD8 /* AppDelegate.swift */,
 				5F3BE1CC219A4AB7005C4BD8 /* ViewController.swift */,
-				5F3BE1CE219A4AB7005C4BD8 /* Main.storyboard */,
 				5F3BE1D1219A4AB8005C4BD8 /* Assets.xcassets */,
-				5F3BE1D3219A4AB8005C4BD8 /* LaunchScreen.storyboard */,
 				5F3BE1D6219A4AB8005C4BD8 /* Info.plist */,
 			);
 			path = PufferExample;
@@ -195,8 +195,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
 			);
 			mainGroup = 5F3BE1BE219A4AB7005C4BD8;
 			productRefGroup = 5F3BE1C8219A4AB7005C4BD8 /* Products */;
@@ -214,9 +212,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F3BE1D5219A4AB8005C4BD8 /* LaunchScreen.storyboard in Resources */,
+				5FC56357229871620094652C /* LaunchScreen.storyboard in Resources */,
 				5F3BE1D2219A4AB8005C4BD8 /* Assets.xcassets in Resources */,
-				5F3BE1D0219A4AB7005C4BD8 /* Main.storyboard in Resources */,
+				5FC56356229871620094652C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,25 +324,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		5F3BE1CE219A4AB7005C4BD8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5F3BE1CF219A4AB7005C4BD8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		5F3BE1D3219A4AB8005C4BD8 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5F3BE1D4219A4AB8005C4BD8 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		5F3BE1E2219A4AB8005C4BD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -404,6 +383,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -458,6 +438,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -477,7 +458,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.echo.PufferExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -497,7 +478,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.echo.PufferExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -518,7 +499,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.echo.PufferExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PufferExample.app/PufferExample";
 			};
@@ -540,7 +521,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.echo.PufferExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PufferExample.app/PufferExample";
 			};
