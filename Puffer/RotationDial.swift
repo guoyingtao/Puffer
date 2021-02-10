@@ -89,9 +89,18 @@ extension RotationDial {
     
     private func handleRotation(by angle: CGAngle) {
         if case .limit = config.rotationLimitType {
-            guard angle <= angleLimit else {
+            if getRotationAngle().degrees + angle.degrees > angleLimit.degrees {
+                rotateDialPlate(to: angleLimit)
+                didRotate(angleLimit)
                 return
             }
+
+            if getRotationAngle().degrees + angle.degrees < -angleLimit.degrees {
+                rotateDialPlate(to: -angleLimit)
+                didRotate(-angleLimit)
+                return
+            }
+            
         }
         
         if rotateDialPlate(by: angle) {

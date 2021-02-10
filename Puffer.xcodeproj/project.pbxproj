@@ -19,6 +19,7 @@
 		5F3BE1FF219CCFC5005C4BD8 /* RotationDialPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BE1FE219CCFC5005C4BD8 /* RotationDialPlate.swift */; };
 		5FC56328229641C80094652C /* CGAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC56327229641C80094652C /* CGAngle.swift */; };
 		5FC5632A229642F60094652C /* RotationDialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC56329229642F60094652C /* RotationDialViewModel.swift */; };
+		5FC5635D229881A60094652C /* RotationDial+Touches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC5635C229881A60094652C /* RotationDial+Touches.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		5F3BE1FE219CCFC5005C4BD8 /* RotationDialPlate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationDialPlate.swift; sourceTree = "<group>"; };
 		5FC56327229641C80094652C /* CGAngle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGAngle.swift; sourceTree = "<group>"; };
 		5FC56329229642F60094652C /* RotationDialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationDialViewModel.swift; sourceTree = "<group>"; };
+		5FC5635C229881A60094652C /* RotationDial+Touches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RotationDial+Touches.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		5F3BE19E219A48CA005C4BD8 /* Puffer */ = {
 			isa = PBXGroup;
 			children = (
+				5FC5635C229881A60094652C /* RotationDial+Touches.swift */,
 				5F3BE1BA219A4996005C4BD8 /* CoreGraphicsExtensions.swift */,
 				5F3BE1B6219A493E005C4BD8 /* RotationDial.swift */,
 				5FC56329229642F60094652C /* RotationDialViewModel.swift */,
@@ -187,6 +190,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				Base,
 			);
 			mainGroup = 5F3BE192219A48CA005C4BD8;
@@ -229,6 +233,7 @@
 				5F3BE1FF219CCFC5005C4BD8 /* RotationDialPlate.swift in Sources */,
 				5FC56328229641C80094652C /* CGAngle.swift in Sources */,
 				5F3BE1BD219A49A8005C4BD8 /* Puffer.swift in Sources */,
+				5FC5635D229881A60094652C /* RotationDial+Touches.swift in Sources */,
 				5FC5632A229642F60094652C /* RotationDialViewModel.swift in Sources */,
 				5F3BE1EE219A70DD005C4BD8 /* RotationCalculator.swift in Sources */,
 			);
